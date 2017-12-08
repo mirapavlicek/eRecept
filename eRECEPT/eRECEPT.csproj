@@ -73,6 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="bin\Debug\cert\suklTEST00000910487.pfx" />
+    <None Include="bin\Debug\eRECEPT.dll.config" />
+    <None Include="bin\Release\cert\suklTEST00000910487.pfx" />
+    <None Include="bin\Release\eRECEPT.dll.config" />
     <None Include="cert\suklTEST00000910487.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -246,6 +250,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ZruseniPredpisu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\eRECEPT.dll" />
+    <Content Include="bin\Debug\eRECEPT.pdb" />
+    <Content Include="bin\Release\eRECEPT.dll" />
+    <Content Include="bin\Release\eRECEPT.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
