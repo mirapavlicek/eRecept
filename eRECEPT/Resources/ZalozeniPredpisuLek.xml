@@ -1,0 +1,12 @@
+<v2301:PLP>
+  <v2301:Mnozstvi>${mnozstvi}</v2301:Mnozstvi>
+  <v2301:Navod>${navod}</v2301:Navod>
+  <v2301:Diagnoza>${diagnoza}</v2301:Diagnoza>
+  <v2301:Uhrada>${uhrada}</v2301:Uhrada>
+  ${druhReceptu}
+  <v2301:Nezamenovat>${nezamenovat}</v2301:Nezamenovat>
+  <v2301:ID_LP_Zdroj>${lpzdroj}</v2301:ID_LP_Zdroj>
+</v2301:PLP>
+
+
+       

@@ -1,0 +1,10 @@
+  <v2301:HVLPReg>
+    <v2301:Kod>${kodSukl}</v2301:Kod>
+    <v2301:ATC>${atc}</v2301:ATC>
+    <v2301:Nazev>${nazevLeku}</v2301:Nazev>
+    <v2301:Forma>${formaLeku}</v2301:Forma>
+    <v2301:Sila>${sila}</v2301:Sila>
+    <!--Optional:-->
+    <v2301:CestaPodani>${cestaPodani}</v2301:CestaPodani>
+    <v2301:Baleni>${baleni}</v2301:Baleni>
+  </v2301:HVLPReg>

@@ -1,0 +1,2751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:sig="http://www.w3.org/2000/09/xmldsig#" xmlns:erp="http://www.sukl.cz/erp/201704" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sukl.cz/erp/201704" elementFormDefault="qualified">
+   <!--version 201704A update4-->
+   <xsd:import schemaLocation="schema2.xsd" namespace="http://www.w3.org/2000/09/xmldsig#"/>
+   <xsd:complexType name="davka_dokladu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_doklady_datum_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_dokladu_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="Identifikator" type="erp:identifikace_dokladu_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_dokladu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Identifikator" type="erp:identifikace_dokladu_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_doporucujici_type">
+      <xsd:sequence>
+         <xsd:element name="Jmeno" type="erp:jmeno_osoby_type"/>
+         <xsd:element name="PZS" type="erp:doporucujici_poskytovatel_type"/>
+         <xsd:element name="Odbornost" type="erp:odbornost_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_informace_o_zrusenem_dokladu_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="InformaceOZruseni" type="erp:zruseni_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_log_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="InGuid" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="OutGuid" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="PreDT" type="xsd:dateTime" minOccurs="0"/>
+         <xsd:element name="InDT" type="xsd:dateTime"/>
+         <xsd:element name="OutDT" type="xsd:dateTime"/>
+         <xsd:element name="SwClient" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="IntVersion" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="SoapAction" type="xsd:string"/>
+         <xsd:element name="FaultString" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="ClientUser" type="xsd:string"/>
+         <xsd:element name="ClientUnit" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="ClientRole" type="erp:typ_pristupujiciho" minOccurs="0"/>
+         <xsd:element name="ForwardedFor" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="ClientCertSubjectDN" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="SignSubjectCN" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="DocumentId" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Via" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="AccessType" type="erp:pristup_k_dokladu" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_pacient_type">
+      <xsd:sequence>
+         <xsd:element name="Totoznost" type="erp:totoznost_type"/>
+         <xsd:element name="CP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{9,10}"/>
+                  <xsd:minLength value="9"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ZP" type="erp:zdravotni_pojistovna_type" minOccurs="0"/>
+         <xsd:element name="Telefon" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Email" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="3"/>
+                  <xsd:maxLength value="256"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Notifikace" type="erp:notifikace" minOccurs="0"/>
+         <xsd:element name="Veznice" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Hmotnost" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.5"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Pohlavi" type="erp:pohlavi" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_predepisujici_type">
+      <xsd:sequence>
+         <xsd:element name="Lekar" type="erp:identifikovana_osoba_type" minOccurs="0"/>
+         <xsd:element name="Oddeleni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICZ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PZS" type="erp:identifikovany_poskytovatel_type" minOccurs="0"/>
+         <xsd:element name="Telefon" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Email" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="3"/>
+                  <xsd:maxLength value="256"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Odbornost" type="erp:odbornost_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_predepsany_lp_erp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:int">
+                  <xsd:minInclusive value="1"/>
+                  <xsd:maxInclusive value="9999"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Navod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="80"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Diagnoza" type="erp:diagnoza_type" minOccurs="0"/>
+         <xsd:element name="PridruzenaDiagnoza" type="erp:diagnoza_type" minOccurs="0"/>
+         <xsd:element name="Uhrada" type="erp:uhrada"/>
+         <xsd:element name="HVLPReg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="HVLPNereg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="IPLP" type="erp:iplp_predpis_type" minOccurs="0"/>
+         <xsd:element name="INN" type="erp:inn_predpis_type" minOccurs="0"/>
+         <xsd:element name="Nezamenovat" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Prekroceni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="ZadankaZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_revize_type">
+      <xsd:sequence>
+         <xsd:element name="Lekar" type="erp:identifikovana_osoba_type"/>
+         <xsd:element name="Telefon">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Schvaleno" type="xsd:date"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydany_lp_erp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.01"/>
+                  <xsd:maxInclusive value="9999.99"/>
+                  <xsd:totalDigits value="6"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Navod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="80"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Exspirace" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="Cena" type="erp:ceny_lp_type"/>
+         <xsd:element name="Uhrada" type="erp:uhrada_lp_type" minOccurs="0"/>
+         <xsd:element name="Sarze">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="50"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="EAN" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{13}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="SerioveCislo" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HVLPReg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="HVLPNereg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="IPLP" type="erp:iplp_type" minOccurs="0"/>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_ERP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydavajici_type">
+      <xsd:sequence>
+         <xsd:element name="Lekarnik" type="erp:identifikovana_osoba_type"/>
+         <xsd:element name="ICZ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PZS" type="erp:identifikovany_poskytovatel_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_zkraceny_lp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.01"/>
+                  <xsd:maxInclusive value="9999.99"/>
+                  <xsd:totalDigits value="6"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Kod" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Navod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="80"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_dokladu_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_prehledy_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_dokladu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_prehledy_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Datum" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="Kod" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Skupina" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Nazev" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="PZS" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Osoba" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Pocet" type="xsd:decimal" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_doklady_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_doklady_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_pracoviste_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_doklady_datumcas_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_logu_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_logy_datumcas_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_logu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Filtr" type="erp:filtr_logy_datumcas_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_dokladu_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="12"/>
+                  <xsd:maxLength value="25"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="LP" type="erp:ulozeni_lp_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_doporucujici_type">
+      <xsd:sequence>
+         <xsd:element name="Jmeno" type="erp:jmeno_osoby_type"/>
+         <xsd:element name="PZS" type="erp:doporucujici_poskytovatel_type"/>
+         <xsd:element name="Odbornost">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9][0-9A-Z][0-9]"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_lp_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_pacient_type">
+      <xsd:sequence>
+         <xsd:element name="Totoznost" type="erp:totoznost_type"/>
+         <xsd:element name="CP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{9,10}"/>
+                  <xsd:minLength value="9"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{3}"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Email" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="3"/>
+                  <xsd:maxLength value="256"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Notifikace" type="erp:notifikace" minOccurs="0"/>
+         <xsd:element name="Veznice" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Hmotnost" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.5"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Pohlavi" type="erp:pohlavi" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_predepisujici_type">
+      <xsd:sequence>
+         <xsd:element name="Lekar">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Oddeleni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICZ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PZS">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{11}"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Email" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="3"/>
+                  <xsd:maxLength value="256"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Odbornost" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9][0-9A-Z][0-9]"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_predepsany_lp_erp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:int">
+                  <xsd:minInclusive value="1"/>
+                  <xsd:maxInclusive value="999"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Navod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="80"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Diagnoza" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PridruzenaDiagnoza" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Uhrada" type="erp:uhrada"/>
+         <xsd:element name="HVLPReg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="HVLPNereg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="IPLP" type="erp:iplp_predpis_type" minOccurs="0"/>
+         <xsd:element name="INN" type="erp:inn_predpis_type" minOccurs="0"/>
+         <xsd:element name="Nezamenovat" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Prekroceni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="ZadankaZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_vydany_lp_erp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.01"/>
+                  <xsd:maxInclusive value="999.99"/>
+                  <xsd:totalDigits value="5"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Navod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="80"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Exspirace" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="Cena" type="erp:ceny_lp_type"/>
+         <xsd:element name="Uhrada" type="erp:uhrada_lp_type" minOccurs="0"/>
+         <xsd:element name="HVLPReg" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="HVLPNereg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="IPLP" type="erp:iplp_type" minOccurs="0"/>
+         <xsd:element name="Sarze">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="50"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="EAN" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{13}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="SerioveCislo" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_ERP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_vydavajici_type">
+      <xsd:sequence>
+         <xsd:element name="Lekarnik">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICZ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PZS">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{11}"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_dokladu_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Uzivatel">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Pracoviste">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{11}"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_Dokladu">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="12"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="AutorizacniID" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="DatumZruseni" type="xsd:date"/>
+         <xsd:element name="DuvodZruseni">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_dokladu_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="12"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="DatumZruseni" type="xsd:date"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="Totoznost" type="erp:totoznost_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Totoznost" type="erp:totoznost_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Pacienta" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="adresa_type">
+      <xsd:sequence>
+         <xsd:element name="NazevUlice" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="48"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CisloPopisne" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CisloEvidencni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CisloOrientacni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="4"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="NazevObce">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="48"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="NazevCastiObce" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="48"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="NazevOkresu" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="32"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PSC">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:length value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ceny_lp_type">
+      <xsd:sequence>
+         <xsd:element name="CenaPuvodce" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.00"/>
+                  <xsd:maxInclusive value="9999999.99"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CenaCelkem" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.00"/>
+                  <xsd:maxInclusive value="9999999.99"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="chyba_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:length value="4"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Skupina">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="40"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Popis">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Doporuceni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="diagnoza_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="70"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="doporucujici_poskytovatel_type">
+      <xsd:sequence>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICZ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ICP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="IC" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8,10}"/>
+                  <xsd:minLength value="8"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="DIC" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="CZ[0-9]{8,10}"/>
+                  <xsd:minLength value="10"/>
+                  <xsd:maxLength value="12"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="filtr_doklady_datum_type">
+      <xsd:sequence>
+         <xsd:element name="Datum" type="xsd:date"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="filtr_doklady_datumcas_type">
+      <xsd:sequence>
+         <xsd:element name="DatumCasOd" type="xsd:dateTime"/>
+         <xsd:element name="DatumCasDo" type="xsd:dateTime"/>
+         <xsd:element name="Limit" type="xsd:int"/>
+         <xsd:element name="LP" type="xsd:boolean" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="filtr_doklady_type">
+      <xsd:sequence>
+         <xsd:element name="DatumOd" type="xsd:date"/>
+         <xsd:element name="CasOd" type="xsd:time" minOccurs="0"/>
+         <xsd:element name="DatumDo" type="xsd:date"/>
+         <xsd:element name="CasDo" type="xsd:time" minOccurs="0"/>
+         <xsd:element name="Limit" type="xsd:int"/>
+         <xsd:element name="ID_Pacienta" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CP_Pacienta" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="9"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Obsah" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="255"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Stav" type="erp:stav_elektronickeho_receptu" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Vlastni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="LP" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Duvod" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="filtr_logy_datumcas_type">
+      <xsd:sequence>
+         <xsd:element name="DatumCasOd" type="xsd:dateTime"/>
+         <xsd:element name="DatumCasDo" type="xsd:dateTime"/>
+         <xsd:element name="Limit" type="xsd:int"/>
+         <xsd:element name="InGuid" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="ClientUser" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="DocumentId" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Fault" type="xsd:boolean" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="filtr_prehledy_type">
+      <xsd:sequence>
+         <xsd:element name="DatumOd" type="xsd:date"/>
+         <xsd:element name="DatumDo" type="xsd:date"/>
+         <xsd:element name="Kod" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Skupina" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PZS" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Osoba" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CJ" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="32"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="hvlp_type">
+      <xsd:sequence>
+         <xsd:element name="Kod" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ATC" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="146"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Forma" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="27"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Sila" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="24"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CestaPodani" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="15"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Baleni" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="22"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="identifikace_dokladu_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Podani" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_Dokladu" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="12"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="identifikace_prihlaseneho_pres_sso_type">
+      <xsd:sequence>
+         <xsd:element name="ID">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Domena">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jmeno">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="24"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Prijmeni">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="35"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Pracoviste" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="identifikace_pristupujiciho_type">
+      <xsd:sequence>
+         <xsd:element name="Uzivatel">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Pracoviste">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{11}"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="identifikovana_osoba_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jmeno" type="erp:jmeno_osoby_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="identifikovany_poskytovatel_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{11}"/>
+                  <xsd:length value="11"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="IC" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8,10}"/>
+                  <xsd:minLength value="8"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="DIC" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="CZ[0-9]{8,10}"/>
+                  <xsd:minLength value="10"/>
+                  <xsd:maxLength value="12"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Telefon">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Adresa" type="erp:adresa_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="inn_predpis_type">
+      <xsd:sequence>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Forma">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="27"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Sila">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="24"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CestaPodani" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="15"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Baleni">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="22"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="iplp_predpis_type">
+      <xsd:sequence>
+         <xsd:element name="PostupPripravy">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="4000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="146"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CestaPodani" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="15"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Slozka" type="erp:slozka_iplp_predpis_type" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="iplp_type">
+      <xsd:sequence>
+         <xsd:element name="KodVZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PostupPripravy" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="4000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="146"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CestaPodani" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="15"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Slozka" type="erp:slozka_iplp_type" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="jmeno_osoby_type">
+      <xsd:sequence>
+         <xsd:element name="Prijmeni">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="35"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jmena">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="24"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="mobil_pristup_type">
+      <xsd:sequence>
+         <xsd:element name="Password" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="128"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="IMEI" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="odbornost_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="60"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="slozka_iplp_predpis_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.000000"/>
+                  <xsd:maxInclusive value="999999999.999999"/>
+                  <xsd:totalDigits value="15"/>
+                  <xsd:fractionDigits value="6"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jednotka" type="erp:jednotka"/>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Surovina" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HVLPReg" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="slozka_iplp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.000000"/>
+                  <xsd:maxInclusive value="999999999.999999"/>
+                  <xsd:totalDigits value="15"/>
+                  <xsd:fractionDigits value="6"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jednotka" type="erp:jednotka"/>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HrazenoZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.00"/>
+                  <xsd:maxInclusive value="9999999.99"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Surovina" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HVLPReg" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Sarze">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="50"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="EAN" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{13}"/>
+                  <xsd:length value="13"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="SerioveCislo" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="20"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="totoznost_type">
+      <xsd:sequence>
+         <xsd:element name="Jmeno" type="erp:jmeno_osoby_type" minOccurs="0"/>
+         <xsd:element name="DatumNarozeni" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="Adresa" type="erp:adresa_type" minOccurs="0"/>
+         <xsd:element name="DruhDokladu" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="CisloDokladu" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="9"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ROB" type="erp:rob_ztotozneni" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="typ_dokladu_type">
+      <xsd:sequence>
+         <xsd:element name="Verze" type="xsd:string"/>
+         <xsd:element name="Prefix">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:length value="1"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Popis">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PlatOd" type="xsd:date"/>
+         <xsd:element name="PlatDo" type="xsd:date" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="uhrada_lp_type">
+      <xsd:sequence>
+         <xsd:element name="HrazenoZP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.00"/>
+                  <xsd:maxInclusive value="9999999.99"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ZapocitatelnyDoplatek">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.00"/>
+                  <xsd:maxInclusive value="9999999.99"/>
+                  <xsd:totalDigits value="9"/>
+                  <xsd:fractionDigits value="2"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="verze_aplikace_type">
+      <xsd:sequence>
+         <xsd:element name="Verze">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="24"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="100"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Doklad" type="erp:typ_dokladu_type" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zdravotni_pojistovna_type">
+      <xsd:sequence>
+         <xsd:element name="Kod">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{3}"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="100"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zkraceny_pacient_type">
+      <xsd:sequence>
+         <xsd:element name="Totoznost" type="erp:totoznost_type"/>
+         <xsd:element name="CP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{9,10}"/>
+                  <xsd:minLength value="9"/>
+                  <xsd:maxLength value="10"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ZP" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{3}"/>
+                  <xsd:length value="3"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zprava_type">
+            <xsd:sequence>
+               <xsd:element name="SW_Klienta">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:length value="12"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_odpoved_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zprava_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Podani">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Prijato" type="xsd:dateTime"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Zpravy">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                  <xsd:length value="36"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Verze">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{6}[A-Z]{1}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Odeslano" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_type">
+      <xsd:sequence>
+         <xsd:element name="DatumCasZruseni" type="xsd:dateTime"/>
+         <xsd:element name="DuvodZruseni">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="app_info_dotaz_type"/>
+   <xsd:complexType name="app_info_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="AktualniVerze" type="erp:verze_aplikace_type"/>
+         <xsd:element name="DatumCasServeru" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="cis_chyb_verze_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Chyba" type="erp:chyba_type" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="davka_dokladu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:davka_dokladu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_dokladu_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_dokladu_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_dokladu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_dokladu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_informace_o_zrusenem_dokladu_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_informace_o_zrusenem_dokladu_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:prehled_dokladu_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:prehled_dokladu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="prehled_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:prehled_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:seznam_dokladu_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:seznam_dokladu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_dokladu_pracoviste_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:seznam_dokladu_pracoviste_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_logu_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:seznam_logu_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_logu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:seznam_logu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_logu_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_log_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="stazeni_souboru_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_dokladu_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:ulozeni_dokladu_doklad_odpoved_type"/>
+         <xsd:element name="Chyba" type="erp:chyba_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_pojistovny_predpisu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_pojistovny_predpisu_doklad_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_stavu_predpisu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_stavu_predpisu_doklad_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_bez_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_bez_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_zep_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zprava_zep_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_dokladu_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zruseni_dokladu_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_erp_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:ztotozneni_pacienta_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:ztotozneni_pacienta_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ztotozneni_pacienta_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:ztotozneni_pacienta_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="digitalizace_predepisujici_type">
+      <xsd:sequence>
+         <xsd:element name="ICP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{8}"/>
+                  <xsd:length value="8"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="digitalizace_predpisu_erp_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="DatumVystaveni" type="xsd:date"/>
+         <xsd:element name="PlatnostDo" type="xsd:date"/>
+         <xsd:element name="Rodina" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Opakovani" type="xsd:int" minOccurs="0"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="Predepisujici" type="erp:digitalizace_predepisujici_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_pacient_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="ID_Pacienta" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_pacient_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="MobilPristup" type="erp:mobil_pristup_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_predpisu_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="12"/>
+                  <xsd:maxLength value="25"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="DatumVystaveni" type="xsd:date"/>
+         <xsd:element name="PlatnostDo" type="xsd:date"/>
+         <xsd:element name="VypisDo" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="Akutni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Rodina" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Preshranicni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Opakovani" type="xsd:int" minOccurs="0"/>
+         <xsd:element name="Pacient" type="erp:nacteni_pacient_type"/>
+         <xsd:element name="Predepisujici" type="erp:nacteni_predepisujici_type"/>
+         <xsd:element name="Doporucujici" type="erp:nacteni_doporucujici_type" minOccurs="0"/>
+         <xsd:element name="Revize" type="erp:nacteni_revize_type" minOccurs="0"/>
+         <xsd:element name="PLP" type="erp:nacteni_predepsany_lp_erp_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="UpozornitLekare" type="erp:upozornit_lekare" minOccurs="0"/>
+         <xsd:element name="Stav" type="erp:stav_elektronickeho_receptu"/>
+         <xsd:element name="Vydej" type="erp:nacteni_zkraceny_vydej_erp_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:nacteni_vydavajici_type"/>
+         <xsd:element name="VLP" type="erp:nacteni_vydany_lp_erp_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="UpozornitLekare" type="erp:upozornit_lekare" minOccurs="0"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_zkraceny_predpis_erp_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="DatumVystaveni" type="xsd:date"/>
+         <xsd:element name="PlatnostDo" type="xsd:date"/>
+         <xsd:element name="VypisDo" type="xsd:date" minOccurs="0"/>
+         <xsd:element name="NazevPZS" type="xsd:string"/>
+         <xsd:element name="JmenoPredepisujiciho" type="xsd:string"/>
+         <xsd:element name="Opakovani" type="xsd:int" minOccurs="0"/>
+         <xsd:element name="PLP" type="erp:nacteni_zkraceny_lp_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="Stav" type="erp:stav_elektronickeho_receptu"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+         <xsd:element name="Zruseni" type="erp:zruseni_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_zkraceny_vydej_erp_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="NazevPZS" type="xsd:string"/>
+         <xsd:element name="JmenoVydavajiciho" type="xsd:string"/>
+         <xsd:element name="VLP" type="erp:nacteni_zkraceny_lp_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="UpozornitLekare" type="erp:upozornit_lekare" minOccurs="0"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+         <xsd:element name="Zruseni" type="erp:zruseni_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_mobil_doklad_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Prihlaseny" type="erp:identifikace_prihlaseneho_pres_sso_type"/>
+         <xsd:element name="ID_Pacienta" type="xsd:string"/>
+         <xsd:element name="MobilPristup" type="erp:mobil_pristup_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_predpisu_erp_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="DatumVystaveni" type="xsd:date"/>
+         <xsd:element name="PlatnostDo" type="xsd:date"/>
+         <xsd:element name="Akutni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Rodina" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Preshranicni" type="xsd:boolean" minOccurs="0"/>
+         <xsd:element name="Opakovani" type="xsd:int" minOccurs="0"/>
+         <xsd:element name="Pacient" type="erp:ulozeni_pacient_type"/>
+         <xsd:element name="Predepisujici" type="erp:ulozeni_predepisujici_type"/>
+         <xsd:element name="Doporucujici" type="erp:ulozeni_doporucujici_type" minOccurs="0"/>
+         <xsd:element name="PLP" type="erp:ulozeni_predepsany_lp_erp_type" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="UpozornitLekare" type="erp:upozornit_lekare" minOccurs="0"/>
+         <xsd:element name="Stav" type="erp:stav_elektronickeho_receptu"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_erp_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:ulozeni_vydavajici_type"/>
+         <xsd:element name="VLP" type="erp:ulozeni_vydany_lp_erp_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Pozn" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="1000"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="UpozornitLekare" type="erp:upozornit_lekare" minOccurs="0"/>
+         <xsd:element name="ID_Dokladu_ERP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="25"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Stav_ERP" type="erp:stav_elektronickeho_receptu"/>
+         <xsd:element name="VypisDo_ERP" type="xsd:date" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_pojistovny_predpisu_doklad_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="ZP" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_predpisu_erp_doklad_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zalozeni_predpisu_erp_doklad_dotaz_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Dokladu" type="xsd:string"/>
+               <xsd:element name="AutorizacniID" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_stavu_predpisu_doklad_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Stav" type="erp:stav_elektronickeho_receptu"/>
+         <xsd:element name="VypisDo" type="xsd:date" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_erp_doklad_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zalozeni_vydeje_erp_doklad_dotaz_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Dokladu" type="xsd:string"/>
+               <xsd:element name="AutorizacniID" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_vydeje_erp_doklad_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zruseni_dokladu_doklad_dotaz_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+               <xsd:element name="Stav_ERP" type="erp:stav_elektronickeho_receptu"/>
+               <xsd:element name="VypisDo_ERP" type="xsd:date" minOccurs="0"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="digitalizace_predpisu_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:digitalizace_predpisu_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_mobil_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_pacient_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_pacient_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_pacient_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_predpisu_erp_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_predpisu_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_erp_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_vydeje_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_predpisu_erp_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_zkraceny_predpis_erp_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_vydeju_erp_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_zkraceny_vydej_erp_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_mobil_dotaz_sso_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_mobil_doklad_dotaz_sso_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_predpisu_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zalozeni_predpisu_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zalozeni_vydeje_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_predpisu_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_predpisu_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_vydeje_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zruseni_vydeje_erp_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zruseni_vydeje_erp_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+         <xsd:element ref="sig:Signature"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_omezeny_lp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.000001"/>
+                  <xsd:maxInclusive value="999999999.999999"/>
+                  <xsd:totalDigits value="15"/>
+                  <xsd:fractionDigits value="6"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jednotka" type="erp:jednotka"/>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Surovina" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HVLPReg" type="erp:hvlp_type" minOccurs="0"/>
+         <xsd:element name="Obsah">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.000001"/>
+                  <xsd:maxInclusive value="999999999.999999"/>
+                  <xsd:totalDigits value="15"/>
+                  <xsd:fractionDigits value="6"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_lpo_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:nacteni_vydavajici_type"/>
+         <xsd:element name="Predepisujici" type="erp:nacteni_predepisujici_type"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="OLP" type="erp:nacteni_omezeny_lp_type" maxOccurs="unbounded"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_otc_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu" type="xsd:string"/>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:nacteni_vydavajici_type"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="OLP" type="erp:nacteni_omezeny_lp_type" maxOccurs="unbounded"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_zkraceny_zaznam_doklad_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="NazevPZS" type="xsd:string"/>
+         <xsd:element name="JmenoVydavajiciho" type="xsd:string"/>
+         <xsd:element name="OLP" type="erp:nacteni_omezeny_lp_type" maxOccurs="unbounded"/>
+         <xsd:element name="Zmena" type="xsd:dateTime"/>
+         <xsd:element name="Zalozeni" type="xsd:dateTime"/>
+         <xsd:element name="Zruseni" type="erp:zruseni_type" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="overeni_omezeni_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Pristupujici" type="erp:identifikace_pristupujiciho_type"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="OLP" type="erp:ulozeni_omezeny_lp_type"/>
+         <xsd:element name="ID_Dokladu_ERP" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ulozeni_omezeny_lp_type">
+      <xsd:sequence>
+         <xsd:element name="Mnozstvi">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:decimal">
+                  <xsd:minInclusive value="0.000001"/>
+                  <xsd:maxInclusive value="999999999.999999"/>
+                  <xsd:totalDigits value="15"/>
+                  <xsd:fractionDigits value="6"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Jednotka" type="erp:jednotka"/>
+         <xsd:element name="Nazev">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="200"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Diagnoza" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="PridruzenaDiagnoza" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="5"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Surovina" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="HVLPReg" minOccurs="0">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                  <xsd:pattern value="[0-9]{7}"/>
+                  <xsd:length value="7"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ID_LP_Zdroj">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:integer">
+                  <xsd:totalDigits value="14"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_lpo_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:ulozeni_vydavajici_type"/>
+         <xsd:element name="Predepisujici" type="erp:ulozeni_predepisujici_type"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="OLP" type="erp:ulozeni_omezeny_lp_type" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_otc_doklad_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="DatumVydeje" type="xsd:date"/>
+         <xsd:element name="Vydavajici" type="erp:ulozeni_vydavajici_type"/>
+         <xsd:element name="Pacient" type="erp:zkraceny_pacient_type"/>
+         <xsd:element name="OLP" type="erp:ulozeni_omezeny_lp_type" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_lpo_doklad_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zalozeni_vydeje_lpo_doklad_dotaz_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Dokladu" type="xsd:string"/>
+               <xsd:element name="ID_Dokladu_ERP" type="xsd:string"/>
+               <xsd:element name="AutorizacniID" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_otc_doklad_dotaz_type">
+      <xsd:complexContent>
+         <xsd:extension base="erp:zalozeni_vydeje_otc_doklad_dotaz_type">
+            <xsd:sequence>
+               <xsd:element name="ID_Dokladu" type="xsd:string"/>
+               <xsd:element name="AutorizacniID" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string"><xsd:whiteSpace value="collapse"/>
+                        <xsd:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_lpo_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_vydeje_lpo_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="nacteni_vydeje_otc_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_vydeje_otc_doklad_odpoved_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="overeni_omezeni_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:overeni_omezeni_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="seznam_zaznamu_odpoved_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:nacteni_zkraceny_zaznam_doklad_odpoved_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Chyba" type="erp:chyba_type" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="Zprava" type="erp:zprava_odpoved_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_lpo_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zalozeni_vydeje_lpo_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zalozeni_vydeje_otc_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zalozeni_vydeje_otc_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_lpo_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_vydeje_lpo_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="zmena_vydeje_otc_dotaz_type">
+      <xsd:sequence>
+         <xsd:element name="Doklad" type="erp:zmena_vydeje_otc_doklad_dotaz_type"/>
+         <xsd:element name="Zprava" type="erp:zprava_dotaz_type"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:element name="Chyba" type="erp:chyba_type"/>
+   <xsd:simpleType name="jednotka">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="g"/>
+         <xsd:enumeration value="ks"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="notifikace">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="EMAIL"/>
+         <xsd:enumeration value="SMS"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="pohlavi">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="M"/>
+         <xsd:enumeration value="F"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="rob_ztotozneni">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="ECD"/>
+         <xsd:enumeration value="JPDN"/>
+         <xsd:enumeration value="JPDNA"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="stav_elektronickeho_receptu">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="KE_SCHVALENI"/>
+         <xsd:enumeration value="ZAMITNUTY"/>
+         <xsd:enumeration value="PREDEPSANY"/>
+         <xsd:enumeration value="PRIPRAVOVANY"/>
+         <xsd:enumeration value="CASTECNE_VYDANY"/>
+         <xsd:enumeration value="PLNE_VYDANY"/>
+         <xsd:enumeration value="NEDOKONCENY_VYDEJ"/>
+         <xsd:enumeration value="UZAVRENY"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="typ_dokladu">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PREDPIS_201704"/>
+         <xsd:enumeration value="OPAKOVACI_201704"/>
+         <xsd:enumeration value="VYDEJ_201704"/>
+         <xsd:enumeration value="ZAZNAM_201704"/>
+         <xsd:enumeration value="DIGI_PREDPIS_201704"/>
+         <xsd:enumeration value="DIGI_OPAKOVACI_201704"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="pristup_k_dokladu">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="ZALOZENI"/>
+         <xsd:enumeration value="NACTENI"/>
+         <xsd:enumeration value="ZMENA"/>
+         <xsd:enumeration value="ZRUSENI"/>
+         <xsd:enumeration value="INFO"/>
+         <xsd:enumeration value="STAV"/>
+         <xsd:enumeration value="SEZNAM"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="typ_pristupujiciho">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="LEKAR"/>
+         <xsd:enumeration value="LEKARNIK"/>
+         <xsd:enumeration value="PACIENT"/>
+         <xsd:enumeration value="PRAC_ZP"/>
+         <xsd:enumeration value="POLICIE"/>
+         <xsd:enumeration value="UREDNIK"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="uhrada">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PACIENT"/>
+         <xsd:enumeration value="ZAKLADNI"/>
+         <xsd:enumeration value="ZVYSENA"/>
+         <xsd:enumeration value="PACIENT_ZAM"/>
+         <xsd:enumeration value="ZAKLADNI_ZAM"/>
+         <xsd:enumeration value="ZVYSENA_ZAM"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="upozornit_lekare">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="PRISTI_NAVSTEVA"/>
+         <xsd:enumeration value="BEZODKLADNE"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+  <xsd:element name="AppInfoDotaz" nillable="true" type="erp:app_info_dotaz_type"></xsd:element>
+  <xsd:element name="AppInfoOdpoved" nillable="true" type="erp:app_info_odpoved_type"></xsd:element>
+  <xsd:element name="NacteniInformaceOZrusenemPredpisuDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="NacteniInformaceOZrusenemPredpisuOdpoved" nillable="true" type="erp:nacteni_informace_o_zrusenem_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiOdpoved" nillable="true" type="erp:nacteni_informace_o_zrusenem_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="CisChybDotaz" nillable="true" type="erp:zprava_bez_dotaz_type"></xsd:element>
+  <xsd:element name="CisChybOdpoved" nillable="true" type="erp:cis_chyb_verze_odpoved_type"></xsd:element>
+  <xsd:element name="ZruseniPredpisuDotaz" nillable="true" type="erp:zruseni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="ZruseniPredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="AppPingDotaz" nillable="true" type="erp:zprava_bez_dotaz_type"></xsd:element>
+  <xsd:element name="AppPingOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+  <xsd:element name="NacteniPredpisuDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="NacteniPredpisuOdpoved" nillable="true" type="erp:nacteni_predpisu_erp_odpoved_type"></xsd:element>
+  <xsd:element name="ZalozeniPredpisuDotaz" nillable="true" type="erp:zalozeni_predpisu_erp_dotaz_type"></xsd:element>
+  <xsd:element name="ZalozeniPredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="VerzeDotaz" nillable="true" type="erp:zprava_bez_dotaz_type"></xsd:element>
+  <xsd:element name="VerzeOdpoved" nillable="true" type="erp:verze_aplikace_type"></xsd:element>
+  <xsd:element name="NacteniVydejeDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="NacteniVydejeOdpoved" nillable="true" type="erp:nacteni_vydeje_erp_odpoved_type"></xsd:element>
+  <xsd:element name="AppPingZEPDotaz" nillable="true" type="erp:zprava_zep_dotaz_type"></xsd:element>
+  <xsd:element name="AppPingZEPOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+  <xsd:element name="ZmenaPredpisuDotaz" nillable="true" type="erp:zmena_predpisu_erp_dotaz_type"></xsd:element>
+  <xsd:element name="ZmenaPredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="StazeniPruvodkyDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="StazeniPruvodkyOdpoved" nillable="true" type="erp:stazeni_souboru_odpoved_type"></xsd:element>
+  <xsd:element name="StazeniPruvodkyDotazSSO" nillable="true" type="erp:nacteni_dokladu_dotaz_sso_type"></xsd:element>
+  <xsd:element name="StazeniPruvodkyOdpovedSSO" nillable="true" type="erp:stazeni_souboru_odpoved_type"></xsd:element>
+
+  <xsd:element name="PripravaVydejuPredepisujicihoDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="PripravaVydejuDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="StazeniVydejuPredepisujicihoDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="StazeniVydejuDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="PrevzetiVydejuPredepisujicihoDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="PrevzetiVydejuDotaz" nillable="true" type="erp:davka_dokladu_dotaz_type"></xsd:element>
+
+  <xsd:element name="PripravaVydejuPredepisujicihoOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+  <xsd:element name="PripravaVydejuOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+  <xsd:element name="StazeniVydejuPredepisujicihoOdpoved" nillable="true" type="erp:stazeni_souboru_odpoved_type"></xsd:element>
+  <xsd:element name="StazeniVydejuOdpoved" nillable="true" type="erp:stazeni_souboru_odpoved_type"></xsd:element>
+  <xsd:element name="PrevzetiVydejuPredepisujicihoOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+  <xsd:element name="PrevzetiVydejuOdpoved" nillable="true" type="erp:zprava_bez_odpoved_type"></xsd:element>
+
+  <xsd:element name="ZmenaVydejeDotaz" nillable="true" type="erp:zmena_vydeje_erp_dotaz_type"></xsd:element>
+  <xsd:element name="ZmenaVydejeOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="ZruseniVydejeDotaz" nillable="true" type="erp:zruseni_vydeje_erp_dotaz_type"></xsd:element>
+  <xsd:element name="ZruseniVydejeOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="DigitalizacePredpisuDotaz" nillable="true" type="erp:digitalizace_predpisu_erp_dotaz_type"></xsd:element>
+  <xsd:element name="DigitalizacePredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="ZalozeniVydejeDotaz" nillable="true" type="erp:zalozeni_vydeje_erp_dotaz_type"></xsd:element>
+  <xsd:element name="ZalozeniVydejeOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="ZmenaStavuPredpisuDotaz" nillable="true" type="erp:zmena_stavu_predpisu_dotaz_type"></xsd:element>
+  <xsd:element name="ZmenaStavuPredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+  <xsd:element name="ZmenaPojistovnyPredpisuDotaz" nillable="true" type="erp:zmena_pojistovny_predpisu_dotaz_type"></xsd:element>
+  <xsd:element name="ZmenaPojistovnyPredpisuOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"></xsd:element>
+
+
+  <xsd:element name="SeznamPredpisuDotaz" nillable="true" type="erp:seznam_dokladu_dotaz_type"></xsd:element>
+  <xsd:element name="SeznamPredpisuOdpoved" nillable="true" type="erp:seznam_predpisu_erp_odpoved_type"></xsd:element>
+  <xsd:element name="SeznamPredpisuDotazSSO" nillable="true" type="erp:seznam_dokladu_dotaz_sso_type"></xsd:element>
+  <xsd:element name="SeznamPredpisuOdpovedSSO" nillable="true" type="erp:seznam_predpisu_erp_odpoved_type"></xsd:element>
+  <xsd:element name="SeznamVydejuPredepisujicihoDotaz" nillable="true" type="erp:seznam_dokladu_pracoviste_dotaz_type"></xsd:element>
+  <xsd:element name="SeznamVydejuPredepisujicihoOdpoved" nillable="true" type="erp:seznam_vydeju_erp_odpoved_type"></xsd:element>
+  <xsd:element name="NacteniVydejeDotazSSO" nillable="true" type="erp:nacteni_dokladu_dotaz_sso_type"></xsd:element>
+  <xsd:element name="NacteniVydejeOdpovedSSO" nillable="true" type="erp:nacteni_vydeje_erp_odpoved_type"></xsd:element>
+  <xsd:element name="ZtotozneniPacientaDotazSSO" nillable="true" type="erp:ztotozneni_pacienta_erp_dotaz_sso_type"></xsd:element>
+  <xsd:element name="ZtotozneniPacientaOdpovedSSO" nillable="true" type="erp:ztotozneni_pacienta_odpoved_type"></xsd:element>
+  <xsd:element name="ZtotozneniPacientaDotaz" nillable="true" type="erp:ztotozneni_pacienta_dotaz_type"></xsd:element>
+  <xsd:element name="ZtotozneniPacientaOdpoved" nillable="true" type="erp:ztotozneni_pacienta_odpoved_type"></xsd:element>
+  <xsd:element name="NacteniPredpisuDotazSSO" nillable="true" type="erp:nacteni_dokladu_dotaz_sso_type"></xsd:element>
+  <xsd:element name="NacteniPredpisuOdpovedSSO" nillable="true" type="erp:nacteni_predpisu_erp_odpoved_type"></xsd:element>
+
+  <xsd:element name="NacteniMobiluDotazSSO" nillable="true" type="erp:nacteni_pacient_dotaz_sso_type"/>
+  <xsd:element name="NacteniMobiluOdpovedSSO" nillable="true" type="erp:nacteni_mobil_odpoved_type"/>
+  <xsd:element name="UlozeniMobiluDotazSSO" nillable="true" type="erp:ulozeni_mobil_dotaz_sso_type"/>
+  <xsd:element name="UlozeniMobiluOdpovedSSO" nillable="true" type="erp:zprava_bez_odpoved_type"/>
+
+  <xsd:element name="NacteniVydejeOTCDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"/>
+  <xsd:element name="NacteniVydejeOTCOdpoved" nillable="true" type="erp:nacteni_vydeje_otc_odpoved_type"/>
+  <xsd:element name="ZalozeniVydejeOTCDotaz" nillable="true" type="erp:zalozeni_vydeje_otc_dotaz_type"/>
+  <xsd:element name="ZalozeniVydejeOTCOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="ZruseniVydejeOTCDotaz" nillable="true" type="erp:zruseni_dokladu_dotaz_type"/>
+  <xsd:element name="ZruseniVydejeOTCOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="ZmenaVydejeOTCDotaz" nillable="true" type="erp:zmena_vydeje_otc_dotaz_type"/>
+  <xsd:element name="ZmenaVydejeOTCOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiOTCDotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"/>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiOTCOdpoved" nillable="true" type="erp:nacteni_informace_o_zrusenem_dokladu_odpoved_type"/>
+  <xsd:element name="OveritVydejDotaz" nillable="true" type="erp:overeni_omezeni_dotaz_type"/>
+  <xsd:element name="OveritVydejOdpoved" nillable="true" type="erp:seznam_zaznamu_odpoved_type"/>
+  <xsd:element name="OveritPredpisDotaz" nillable="true" type="erp:overeni_omezeni_dotaz_type"/>
+  <xsd:element name="OveritPredpisOdpoved" nillable="true" type="erp:seznam_zaznamu_odpoved_type"/>
+
+  <xsd:element name="NacteniVydejeLPODotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"/>
+  <xsd:element name="NacteniVydejeLPOOdpoved" nillable="true" type="erp:nacteni_vydeje_lpo_odpoved_type"/>
+  <xsd:element name="ZalozeniVydejeLPODotaz" nillable="true" type="erp:zalozeni_vydeje_lpo_dotaz_type"/>
+  <xsd:element name="ZalozeniVydejeLPOOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="ZruseniVydejeLPODotaz" nillable="true" type="erp:zruseni_dokladu_dotaz_type"/>
+  <xsd:element name="ZruseniVydejeLPOOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="ZmenaVydejeLPODotaz" nillable="true" type="erp:zmena_vydeje_lpo_dotaz_type"/>
+  <xsd:element name="ZmenaVydejeLPOOdpoved" nillable="true" type="erp:ulozeni_dokladu_odpoved_type"/>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiLPODotaz" nillable="true" type="erp:nacteni_dokladu_dotaz_type"/>
+  <xsd:element name="NacteniInformaceOZrusenemVydejiLPOOdpoved" nillable="true" type="erp:nacteni_informace_o_zrusenem_dokladu_odpoved_type"/>
+
+  <xsd:element name="PrehledVydejuDotazSSO" nillable="true" type="erp:prehled_dotaz_sso_type"/>
+  <xsd:element name="PrehledVydejuOdpovedSSO" nillable="true" type="erp:prehled_odpoved_type"/>
+  <xsd:element name="PrehledPredpisuDotazSSO" nillable="true" type="erp:prehled_dotaz_sso_type"/>
+  <xsd:element name="PrehledPredpisuOdpovedSSO" nillable="true" type="erp:prehled_odpoved_type"/>
+
+  <xsd:element name="SeznamZaznamuDotaz" nillable="true" type="erp:seznam_dokladu_dotaz_type"/>
+  <xsd:element name="SeznamZaznamuOdpoved" nillable="true" type="erp:seznam_zaznamu_odpoved_type"/>
+  <xsd:element name="PrehledVydejuDotaz" nillable="true" type="erp:prehled_dotaz_type"/>
+  <xsd:element name="PrehledVydejuOdpoved" nillable="true" type="erp:prehled_odpoved_type"/>
+
+  <xsd:element name="SeznamLoguDotaz" nillable="true" type="erp:seznam_logu_dotaz_type"/>
+  <xsd:element name="SeznamLoguOdpoved" nillable="true" type="erp:seznam_logu_odpoved_type"/>
+
+  <xsd:element name="SeznamLoguDotazSSO" nillable="true" type="erp:seznam_logu_dotaz_sso_type"/>
+  <xsd:element name="SeznamLoguOdpovedSSO" nillable="true" type="erp:seznam_logu_odpoved_type"/>
+
+</xsd:schema>

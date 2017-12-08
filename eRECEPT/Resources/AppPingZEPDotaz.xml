@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v230="http://www.sukl.cz/erp/201704" xmlns:v2301="http://www.sukl.cz/erp/201704">
+<soapenv:Header/>
+<soapenv:Body>
+<v2301:AppPingZEPDotaz>
+<v2301:Zprava>
+<v2301:ID_Zpravy>${IdZpravy}</v2301:ID_Zpravy>
+<v2301:Verze>${Verze}</v2301:Verze>
+<v2301:Odeslano>${Odeslano}</v2301:Odeslano>
+<v2301:SW_Klienta>${Swklienta}</v2301:SW_Klienta>
+</v2301:Zprava>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+          <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#WithComments"/>
+          <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+          <ds:Reference URI="">
+            <ds:Transforms>
+              <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+            </ds:Transforms>
+            <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+            <ds:DigestValue>${digest}</ds:DigestValue>
+          </ds:Reference>
+        </ds:SignedInfo>
+       <ds:SignatureValue>${signature}</ds:SignatureValue>
+        <ds:KeyInfo>
+          <ds:X509Data>
+            <ds:X509SubjectName>${subjekt}</ds:X509SubjectName>
+            <ds:X509Certificate>${certb64}</ds:X509Certificate>
+          </ds:X509Data>
+        </ds:KeyInfo>
+      </ds:Signature>
+    </v2301:AppPingZEPDotaz>
+  </soapenv:Body>
+</soapenv:Envelope>

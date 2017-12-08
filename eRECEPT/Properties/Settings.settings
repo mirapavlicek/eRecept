@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="eRECEPT.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="test" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar</Value>
+    </Setting>
+    <Setting Name="provoz" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="uuid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">b8234b9c-b7cd-11e7-abc4-cec278b6b50a</Value>
+    </Setting>
+    <Setting Name="heslo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Test1234</Value>
+    </Setting>
+    <Setting Name="pracoviste" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000910487</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

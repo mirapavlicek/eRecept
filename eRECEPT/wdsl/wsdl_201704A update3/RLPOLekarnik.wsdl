@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="RLPOLekarnik" targetNamespace="http://www.sukl.cz/erp/201704" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.sukl.cz/erp/201704" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <!--version_201704A_update3--><wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://www.sukl.cz/erp/201704" schemaLocation="schema1.xsd"></import>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="NacistVerzeResponse">
+    <wsdl:part name="VerzeOdpoved" element="tns:VerzeOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAppInfo">
+    <wsdl:part name="AppInfoDotaz" element="tns:AppInfoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingResponse">
+    <wsdl:part name="AppPingOdpoved" element="tns:AppPingOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChybaResponse">
+    <wsdl:part name="ChybaOdpoved" element="tns:Chyba">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVydejOTCResponse">
+    <wsdl:part name="NacteniVydejeOTCOdpoved" element="tns:NacteniVydejeOTCOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistCiselnikChyb">
+    <wsdl:part name="CisChybDotaz" element="tns:CisChybDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemVydejiOTCResponse">
+    <wsdl:part name="NacteniInformaceOZrusenemVydejiOTCOdpoved" element="tns:NacteniInformaceOZrusenemVydejiOTCOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZalozitVydejOTCResponse">
+    <wsdl:part name="ZalozeniVydejeOTCOdpoved" element="tns:ZalozeniVydejeOTCOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistCiselnikChybResponse">
+    <wsdl:part name="CisChybOdpoved" element="tns:CisChybOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZrusitVydejOTCResponse">
+    <wsdl:part name="ZruseniVydejeOTCOdpoved" element="tns:ZruseniVydejeOTCOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPing">
+    <wsdl:part name="AppPingDotaz" element="tns:AppPingDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingZEPResponse">
+    <wsdl:part name="AppPingZEPOdpoved" element="tns:AppPingZEPOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="OveritVydejResponse">
+    <wsdl:part name="OveritVydejOdpoved" element="tns:OveritVydejOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVerze">
+    <wsdl:part name="VerzeDotaz" element="tns:VerzeDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAppInfoResponse">
+    <wsdl:part name="AppInfoOdpoved" element="tns:AppInfoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZmenitVydejOTC">
+    <wsdl:part name="ZmenaVydejeOTCDotaz" element="tns:ZmenaVydejeOTCDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingZEP">
+    <wsdl:part name="AppPingZEPDotaz" element="tns:AppPingZEPDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZrusitVydejOTC">
+    <wsdl:part name="ZruseniVydejeOTCDotaz" element="tns:ZruseniVydejeOTCDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZalozitVydejOTC">
+    <wsdl:part name="ZalozeniVydejeOTCDotaz" element="tns:ZalozeniVydejeOTCDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVydejOTC">
+    <wsdl:part name="NacteniVydejeOTCDotaz" element="tns:NacteniVydejeOTCDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="OveritVydej">
+    <wsdl:part name="OveritVydejDotaz" element="tns:OveritVydejDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZmenitVydejOTCResponse">
+    <wsdl:part name="ZmenaVydejeOTCOdpoved" element="tns:ZmenaVydejeOTCOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemVydejiOTC">
+    <wsdl:part name="NacteniInformaceOZrusenemVydejiOTCDotaz" element="tns:NacteniInformaceOZrusenemVydejiOTCDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RLPOLekarnik">
+    <wsdl:operation name="GetAppInfo">
+      <wsdl:input name="GetAppInfo" message="tns:GetAppInfo">
+    </wsdl:input>
+      <wsdl:output name="GetAppInfoResponse" message="tns:GetAppInfoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistCiselnikChyb">
+      <wsdl:input name="NacistCiselnikChyb" message="tns:NacistCiselnikChyb">
+    </wsdl:input>
+      <wsdl:output name="NacistCiselnikChybResponse" message="tns:NacistCiselnikChybResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVerze">
+      <wsdl:input name="NacistVerze" message="tns:NacistVerze">
+    </wsdl:input>
+      <wsdl:output name="NacistVerzeResponse" message="tns:NacistVerzeResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZmenitVydejOTC">
+      <wsdl:input name="ZmenitVydejOTC" message="tns:ZmenitVydejOTC">
+    </wsdl:input>
+      <wsdl:output name="ZmenitVydejOTCResponse" message="tns:ZmenitVydejOTCResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPingZEP">
+      <wsdl:input name="AppPingZEP" message="tns:AppPingZEP">
+    </wsdl:input>
+      <wsdl:output name="AppPingZEPResponse" message="tns:AppPingZEPResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZrusitVydejOTC">
+      <wsdl:input name="ZrusitVydejOTC" message="tns:ZrusitVydejOTC">
+    </wsdl:input>
+      <wsdl:output name="ZrusitVydejOTCResponse" message="tns:ZrusitVydejOTCResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZalozitVydejOTC">
+      <wsdl:input name="ZalozitVydejOTC" message="tns:ZalozitVydejOTC">
+    </wsdl:input>
+      <wsdl:output name="ZalozitVydejOTCResponse" message="tns:ZalozitVydejOTCResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPing">
+      <wsdl:input name="AppPing" message="tns:AppPing">
+    </wsdl:input>
+      <wsdl:output name="AppPingResponse" message="tns:AppPingResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVydejOTC">
+      <wsdl:input name="NacistVydejOTC" message="tns:NacistVydejOTC">
+    </wsdl:input>
+      <wsdl:output name="NacistVydejOTCResponse" message="tns:NacistVydejOTCResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OveritVydej">
+      <wsdl:input name="OveritVydej" message="tns:OveritVydej">
+    </wsdl:input>
+      <wsdl:output name="OveritVydejResponse" message="tns:OveritVydejResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemVydejiOTC">
+      <wsdl:input name="NacistInformaceOZrusenemVydejiOTC" message="tns:NacistInformaceOZrusenemVydejiOTC">
+    </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemVydejiOTCResponse" message="tns:NacistInformaceOZrusenemVydejiOTCResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RLPOLekarnikSoapBinding" type="tns:RLPOLekarnik">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetAppInfo">
+      <soap:operation soapAction="GetAppInfo" style="document"/>
+      <wsdl:input name="GetAppInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAppInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistCiselnikChyb">
+      <soap:operation soapAction="NacistCiselnikChyb" style="document"/>
+      <wsdl:input name="NacistCiselnikChyb">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistCiselnikChybResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVerze">
+      <soap:operation soapAction="NacistVerze" style="document"/>
+      <wsdl:input name="NacistVerze">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistVerzeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZmenitVydejOTC">
+      <soap:operation soapAction="ZmenitVydejOTC" style="document"/>
+      <wsdl:input name="ZmenitVydejOTC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZmenitVydejOTCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPingZEP">
+      <soap:operation soapAction="AppPingZEP" style="document"/>
+      <wsdl:input name="AppPingZEP">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AppPingZEPResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZrusitVydejOTC">
+      <soap:operation soapAction="ZrusitVydejOTC" style="document"/>
+      <wsdl:input name="ZrusitVydejOTC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZrusitVydejOTCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZalozitVydejOTC">
+      <soap:operation soapAction="ZalozitVydejOTC" style="document"/>
+      <wsdl:input name="ZalozitVydejOTC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZalozitVydejOTCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPing">
+      <soap:operation soapAction="AppPing" style="document"/>
+      <wsdl:input name="AppPing">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AppPingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVydejOTC">
+      <soap:operation soapAction="NacistVydejOTC" style="document"/>
+      <wsdl:input name="NacistVydejOTC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistVydejOTCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OveritVydej">
+      <soap:operation soapAction="OveritVydej" style="document"/>
+      <wsdl:input name="OveritVydej">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="OveritVydejResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemVydejiOTC">
+      <soap:operation soapAction="NacistInformaceOZrusenemVydejiOTC" style="document"/>
+      <wsdl:input name="NacistInformaceOZrusenemVydejiOTC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemVydejiOTCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RLPOLekarnik">
+    <wsdl:port name="RLPOLekarnik_Port" binding="tns:RLPOLekarnikSoapBinding">
+      <soap:address location="https://lekarnik-soap.test-erecept.sukl.cz/rlpo/Lekarnik"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

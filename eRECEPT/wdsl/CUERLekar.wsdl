@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CUERLekar" targetNamespace="http://www.sukl.cz/erp/201704" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.sukl.cz/erp/201704" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <!--version_201704A_update4--><wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://www.sukl.cz/erp/201704" schemaLocation="schema1.xsd"></import>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="SeznamPredpisu">
+    <wsdl:part name="SeznamPredpisuDotaz" element="tns:SeznamPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAppInfo">
+    <wsdl:part name="AppInfoDotaz" element="tns:AppInfoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChybaResponse">
+    <wsdl:part name="ChybaOdpoved" element="tns:Chyba">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemPredpisu">
+    <wsdl:part name="NacteniInformaceOZrusenemPredpisuDotaz" element="tns:NacteniInformaceOZrusenemPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistCiselnikChybResponse">
+    <wsdl:part name="CisChybOdpoved" element="tns:CisChybOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistPredpis">
+    <wsdl:part name="NacteniPredpisuDotaz" element="tns:NacteniPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SeznamVydejuPredepisujicihoResponse">
+    <wsdl:part name="SeznamVydejuPredepisujicihoOdpoved" element="tns:SeznamVydejuPredepisujicihoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrevzitVydejePredepisujiciho">
+    <wsdl:part name="PrevzetiVydejuPredepisujicihoDotaz" element="tns:PrevzetiVydejuPredepisujicihoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingZEPResponse">
+    <wsdl:part name="AppPingZEPOdpoved" element="tns:AppPingZEPOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZmenitPredpisResponse">
+    <wsdl:part name="ZmenaPredpisuOdpoved" element="tns:ZmenaPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrevzitVydejePredepisujicihoResponse">
+    <wsdl:part name="PrevzetiVydejuPredepisujicihoOdpoved" element="tns:PrevzetiVydejuPredepisujicihoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZalozitPredpisResponse">
+    <wsdl:part name="ZalozeniPredpisuOdpoved" element="tns:ZalozeniPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVerze">
+    <wsdl:part name="VerzeDotaz" element="tns:VerzeDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVydej">
+    <wsdl:part name="NacteniVydejeDotaz" element="tns:NacteniVydejeDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StahnoutVydejePredepisujiciho">
+    <wsdl:part name="StazeniVydejuPredepisujicihoDotaz" element="tns:StazeniVydejuPredepisujicihoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StahnoutPruvodku">
+    <wsdl:part name="StazeniPruvodkyDotaz" element="tns:StazeniPruvodkyDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemVydeji">
+    <wsdl:part name="NacteniInformaceOZrusenemVydejiDotaz" element="tns:NacteniInformaceOZrusenemVydejiDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemVydejiResponse">
+    <wsdl:part name="NacteniInformaceOZrusenemVydejiOdpoved" element="tns:NacteniInformaceOZrusenemVydejiOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVerzeResponse">
+    <wsdl:part name="VerzeOdpoved" element="tns:VerzeOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingResponse">
+    <wsdl:part name="AppPingOdpoved" element="tns:AppPingOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PripravitVydejePredepisujicihoResponse">
+    <wsdl:part name="PripravaVydejuPredepisujicihoOdpoved" element="tns:PripravaVydejuPredepisujicihoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistCiselnikChyb">
+    <wsdl:part name="CisChybDotaz" element="tns:CisChybDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZrusitPredpis">
+    <wsdl:part name="ZruseniPredpisuDotaz" element="tns:ZruseniPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistVydejResponse">
+    <wsdl:part name="NacteniVydejeOdpoved" element="tns:NacteniVydejeOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SeznamPredpisuResponse">
+    <wsdl:part name="SeznamPredpisuOdpoved" element="tns:SeznamPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistPredpisResponse">
+    <wsdl:part name="NacteniPredpisuOdpoved" element="tns:NacteniPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="NacistInformaceOZrusenemPredpisuResponse">
+    <wsdl:part name="NacteniInformaceOZrusenemPredpisuOdpoved" element="tns:NacteniInformaceOZrusenemPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPing">
+    <wsdl:part name="AppPingDotaz" element="tns:AppPingDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZrusitPredpisResponse">
+    <wsdl:part name="ZruseniPredpisuOdpoved" element="tns:ZruseniPredpisuOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZalozitPredpis">
+    <wsdl:part name="ZalozeniPredpisuDotaz" element="tns:ZalozeniPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StahnoutVydejePredepisujicihoResponse">
+    <wsdl:part name="StazeniVydejuPredepisujicihoOdpoved" element="tns:StazeniVydejuPredepisujicihoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PripravitVydejePredepisujiciho">
+    <wsdl:part name="PripravaVydejuPredepisujicihoDotaz" element="tns:PripravaVydejuPredepisujicihoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SeznamVydejuPredepisujiciho">
+    <wsdl:part name="SeznamVydejuPredepisujicihoDotaz" element="tns:SeznamVydejuPredepisujicihoDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAppInfoResponse">
+    <wsdl:part name="AppInfoOdpoved" element="tns:AppInfoOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AppPingZEP">
+    <wsdl:part name="AppPingZEPDotaz" element="tns:AppPingZEPDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StahnoutPruvodkuResponse">
+    <wsdl:part name="StazeniPruvodkyOdpoved" element="tns:StazeniPruvodkyOdpoved">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ZmenitPredpis">
+    <wsdl:part name="ZmenaPredpisuDotaz" element="tns:ZmenaPredpisuDotaz">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CUERLekar">
+    <wsdl:operation name="SeznamPredpisu">
+      <wsdl:input name="SeznamPredpisu" message="tns:SeznamPredpisu">
+    </wsdl:input>
+      <wsdl:output name="SeznamPredpisuResponse" message="tns:SeznamPredpisuResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemVydeji">
+      <wsdl:input name="NacistInformaceOZrusenemVydeji" message="tns:NacistInformaceOZrusenemVydeji">
+    </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemVydejiResponse" message="tns:NacistInformaceOZrusenemVydejiResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppInfo">
+      <wsdl:input name="GetAppInfo" message="tns:GetAppInfo">
+    </wsdl:input>
+      <wsdl:output name="GetAppInfoResponse" message="tns:GetAppInfoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemPredpisu">
+      <wsdl:input name="NacistInformaceOZrusenemPredpisu" message="tns:NacistInformaceOZrusenemPredpisu">
+    </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemPredpisuResponse" message="tns:NacistInformaceOZrusenemPredpisuResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistCiselnikChyb">
+      <wsdl:input name="NacistCiselnikChyb" message="tns:NacistCiselnikChyb">
+    </wsdl:input>
+      <wsdl:output name="NacistCiselnikChybResponse" message="tns:NacistCiselnikChybResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZrusitPredpis">
+      <wsdl:input name="ZrusitPredpis" message="tns:ZrusitPredpis">
+    </wsdl:input>
+      <wsdl:output name="ZrusitPredpisResponse" message="tns:ZrusitPredpisResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistPredpis">
+      <wsdl:input name="NacistPredpis" message="tns:NacistPredpis">
+    </wsdl:input>
+      <wsdl:output name="NacistPredpisResponse" message="tns:NacistPredpisResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PrevzitVydejePredepisujiciho">
+      <wsdl:input name="PrevzitVydejePredepisujiciho" message="tns:PrevzitVydejePredepisujiciho">
+    </wsdl:input>
+      <wsdl:output name="PrevzitVydejePredepisujicihoResponse" message="tns:PrevzitVydejePredepisujicihoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPing">
+      <wsdl:input name="AppPing" message="tns:AppPing">
+    </wsdl:input>
+      <wsdl:output name="AppPingResponse" message="tns:AppPingResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZalozitPredpis">
+      <wsdl:input name="ZalozitPredpis" message="tns:ZalozitPredpis">
+    </wsdl:input>
+      <wsdl:output name="ZalozitPredpisResponse" message="tns:ZalozitPredpisResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVerze">
+      <wsdl:input name="NacistVerze" message="tns:NacistVerze">
+    </wsdl:input>
+      <wsdl:output name="NacistVerzeResponse" message="tns:NacistVerzeResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PripravitVydejePredepisujiciho">
+      <wsdl:input name="PripravitVydejePredepisujiciho" message="tns:PripravitVydejePredepisujiciho">
+    </wsdl:input>
+      <wsdl:output name="PripravitVydejePredepisujicihoResponse" message="tns:PripravitVydejePredepisujicihoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SeznamVydejuPredepisujiciho">
+      <wsdl:input name="SeznamVydejuPredepisujiciho" message="tns:SeznamVydejuPredepisujiciho">
+    </wsdl:input>
+      <wsdl:output name="SeznamVydejuPredepisujicihoResponse" message="tns:SeznamVydejuPredepisujicihoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVydej">
+      <wsdl:input name="NacistVydej" message="tns:NacistVydej">
+    </wsdl:input>
+      <wsdl:output name="NacistVydejResponse" message="tns:NacistVydejResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPingZEP">
+      <wsdl:input name="AppPingZEP" message="tns:AppPingZEP">
+    </wsdl:input>
+      <wsdl:output name="AppPingZEPResponse" message="tns:AppPingZEPResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StahnoutVydejePredepisujiciho">
+      <wsdl:input name="StahnoutVydejePredepisujiciho" message="tns:StahnoutVydejePredepisujiciho">
+    </wsdl:input>
+      <wsdl:output name="StahnoutVydejePredepisujicihoResponse" message="tns:StahnoutVydejePredepisujicihoResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StahnoutPruvodku">
+      <wsdl:input name="StahnoutPruvodku" message="tns:StahnoutPruvodku">
+    </wsdl:input>
+      <wsdl:output name="StahnoutPruvodkuResponse" message="tns:StahnoutPruvodkuResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZmenitPredpis">
+      <wsdl:input name="ZmenitPredpis" message="tns:ZmenitPredpis">
+    </wsdl:input>
+      <wsdl:output name="ZmenitPredpisResponse" message="tns:ZmenitPredpisResponse">
+    </wsdl:output>
+      <wsdl:fault name="ChybaResponse" message="tns:ChybaResponse">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CUERLekarSoapBinding" type="tns:CUERLekar">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SeznamPredpisu">
+      <soap:operation soapAction="SeznamPredpisu" style="document"/>
+      <wsdl:input name="SeznamPredpisu">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SeznamPredpisuResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemVydeji">
+      <soap:operation soapAction="NacistInformaceOZrusenemVydeji" style="document"/>
+      <wsdl:input name="NacistInformaceOZrusenemVydeji">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemVydejiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppInfo">
+      <soap:operation soapAction="GetAppInfo" style="document"/>
+      <wsdl:input name="GetAppInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAppInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistInformaceOZrusenemPredpisu">
+      <soap:operation soapAction="NacistInformaceOZrusenemPredpisu" style="document"/>
+      <wsdl:input name="NacistInformaceOZrusenemPredpisu">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistInformaceOZrusenemPredpisuResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZrusitPredpis">
+      <soap:operation soapAction="ZrusitPredpis" style="document"/>
+      <wsdl:input name="ZrusitPredpis">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZrusitPredpisResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistCiselnikChyb">
+      <soap:operation soapAction="NacistCiselnikChyb" style="document"/>
+      <wsdl:input name="NacistCiselnikChyb">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistCiselnikChybResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistPredpis">
+      <soap:operation soapAction="NacistPredpis" style="document"/>
+      <wsdl:input name="NacistPredpis">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistPredpisResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PrevzitVydejePredepisujiciho">
+      <soap:operation soapAction="PrevzitVydejePredepisujiciho" style="document"/>
+      <wsdl:input name="PrevzitVydejePredepisujiciho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PrevzitVydejePredepisujicihoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPing">
+      <soap:operation soapAction="AppPing" style="document"/>
+      <wsdl:input name="AppPing">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AppPingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZalozitPredpis">
+      <soap:operation soapAction="ZalozitPredpis" style="document"/>
+      <wsdl:input name="ZalozitPredpis">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZalozitPredpisResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVerze">
+      <soap:operation soapAction="NacistVerze" style="document"/>
+      <wsdl:input name="NacistVerze">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistVerzeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PripravitVydejePredepisujiciho">
+      <soap:operation soapAction="PripravitVydejePredepisujiciho" style="document"/>
+      <wsdl:input name="PripravitVydejePredepisujiciho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PripravitVydejePredepisujicihoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SeznamVydejuPredepisujiciho">
+      <soap:operation soapAction="SeznamVydejuPredepisujiciho" style="document"/>
+      <wsdl:input name="SeznamVydejuPredepisujiciho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SeznamVydejuPredepisujicihoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="NacistVydej">
+      <soap:operation soapAction="NacistVydej" style="document"/>
+      <wsdl:input name="NacistVydej">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="NacistVydejResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AppPingZEP">
+      <soap:operation soapAction="AppPingZEP" style="document"/>
+      <wsdl:input name="AppPingZEP">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AppPingZEPResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StahnoutVydejePredepisujiciho">
+      <soap:operation soapAction="StahnoutVydejePredepisujiciho" style="document"/>
+      <wsdl:input name="StahnoutVydejePredepisujiciho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="StahnoutVydejePredepisujicihoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StahnoutPruvodku">
+      <soap:operation soapAction="StahnoutPruvodku" style="document"/>
+      <wsdl:input name="StahnoutPruvodku">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="StahnoutPruvodkuResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ZmenitPredpis">
+      <soap:operation soapAction="ZmenitPredpis" style="document"/>
+      <wsdl:input name="ZmenitPredpis">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZmenitPredpisResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ChybaResponse">
+        <soap:fault name="ChybaResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CUERLekar">
+    <wsdl:port name="CUERLekar_Port" binding="tns:CUERLekarSoapBinding">
+      <soap:address location="https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

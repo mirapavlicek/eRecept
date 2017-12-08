@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v230="http://www.sukl.cz/erp/201704" xmlns:v2301="http://www.sukl.cz/erp/201704">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <v230:ZruseniPredpisuDotaz>
+         <v2301:Doklad>
+            <v2301:Uzivatel>${uzivatel}</v2301:Uzivatel>
+            <v2301:Pracoviste>${pracoviste}</v2301:Pracoviste>
+            <v2301:ID_Dokladu>${idDokladu}</v2301:ID_Dokladu>
+            <v2301:AutorizacniID>${autorizacniid}</v2301:AutorizacniID>
+            <v2301:DatumZruseni>${datumZruseni}</v2301:DatumZruseni>
+            <v2301:DuvodZruseni>${duvodZruseni}</v2301:DuvodZruseni>
+         </v2301:Doklad>
+        <v2301:Zprava>
+          <v2301:ID_Zpravy>${IdZpravy}</v2301:ID_Zpravy>
+          <v2301:Verze>${Verze}</v2301:Verze>
+          <v2301:Odeslano>${Odeslano}</v2301:Odeslano>
+          <v2301:SW_Klienta>${Swklienta}</v2301:SW_Klienta>
+         </v2301:Zprava>
+      </v230:ZruseniPredpisuDotaz>
+  </soapenv:Body>
+</soapenv:Envelope>

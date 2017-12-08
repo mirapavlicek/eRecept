@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestErecept", "TestErecept\TestErecept.csproj", "{FE3B037C-555D-4A80-8555-C3618B9A4715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eRECEPT", "eRECEPT\eRECEPT.csproj", "{AAA45BB3-2E65-4FAA-8E1B-D7C8304C61FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE3B037C-555D-4A80-8555-C3618B9A4715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3B037C-555D-4A80-8555-C3618B9A4715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3B037C-555D-4A80-8555-C3618B9A4715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3B037C-555D-4A80-8555-C3618B9A4715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAA45BB3-2E65-4FAA-8E1B-D7C8304C61FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAA45BB3-2E65-4FAA-8E1B-D7C8304C61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAA45BB3-2E65-4FAA-8E1B-D7C8304C61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAA45BB3-2E65-4FAA-8E1B-D7C8304C61FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F719BBE1-C4EA-4456-8AE2-3989094E9CBE}
+	EndGlobalSection
+EndGlobal

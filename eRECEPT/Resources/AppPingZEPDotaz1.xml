@@ -1,0 +1,8 @@
+<v2301:AppPingZEPDotaz xmlns:v230="http://www.sukl.cz/erp/201704" xmlns:v2301="http://www.sukl.cz/erp/201704">
+      <v2301:Zprava>
+        <v2301:ID_Zpravy>${IdZpravy}</v2301:ID_Zpravy>
+          <v2301:Verze>${Verze}</v2301:Verze>
+            <v2301:Odeslano>${Odeslano}</v2301:Odeslano>
+              <v2301:SW_Klienta>${Swklienta}</v2301:SW_Klienta>
+      </v2301:Zprava>
+</v2301:AppPingZEPDotaz>

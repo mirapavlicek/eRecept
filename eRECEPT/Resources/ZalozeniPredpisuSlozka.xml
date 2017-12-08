@@ -1,0 +1,6 @@
+           <v2301:Slozka>
+              <v2301:Mnozstvi>${mnozstvi}</v2301:Mnozstvi>
+              <v2301:Jednotka>${jednotka}</v2301:Jednotka>
+              <v2301:Nazev>${nazev}</v2301:Nazev>
+              <v2301:Surovina>${surovina}</v2301:Surovina>
+            </v2301:Slozka>
