@@ -1577,7 +1577,7 @@ namespace eRECEPT
             _globalPass = build._globalPass;
             _prostredi = build._prostredi;
             _lekarId = build.LekarId;
-            
+
 
             if (build._pkcs12bytes != null)
             {
@@ -1870,13 +1870,20 @@ namespace eRECEPT
         internal string _obsahChyby; public string obsahChyby { get { return _obsahChyby; } }
         internal string _popis; public string popis { get { return _popis; } }
         internal string _doporuceni; public string doporuceni { get { return _doporuceni; } }
-        internal string _idDokladuPodani; public string idDokladuPodani { get { return  _idDokladuPodani; } }
-        internal string _idLpZdroj; public string idLpZdroj { get { return _idLpZdroj; } }
-        internal string _idLp; public string idLp { get { return _idLp; } }
+        internal string _idDokladuPodani; public string idDokladuPodani { get { return _idDokladuPodani; } }
+        internal List<idLP> _idLp; public List<idLP> idLp { get { return _idLp; } }
         internal string _idZpravyPodani; public string idZpravyPodani { get { return _idZpravyPodani; } }
         internal string _idPodani; public string idPodani { get { return _idPodani; } }
         internal DateTime _prijato; public DateTime prijato { get { return _prijato; } }
         internal bool _chyba; public bool chyba { get { return _chyba; } }
+
+
+        public class idLP
+        {
+            internal string _idLpZdroj; public string idLpZdroj { get { return _idLpZdroj; } }
+            internal string _idLp; public string idLp { get { return _idLp; } }
+        }
+
 
         public zpracujRecept odpovedXML(String val)
         {
@@ -1917,11 +1924,20 @@ namespace eRECEPT
             {
                 XmlNode dokladNode = xn.SelectSingleNode("erp:ID_Dokladu", nsmgr);
                 _idDokladuPodani = dokladNode.InnerText;
-                XmlNode lpNode = xn.SelectSingleNode("erp:LP", nsmgr);
-                if (lpNode != null)
+                XmlNodeList lpNode = xn.SelectNodes("erp:LP", nsmgr);
+                _idLp = new List<idLP>();
+                foreach (XmlNode xnlp in lpNode)
                 {
-                    _idLpZdroj = lpNode["erp:ID_LP_Zdroj"].InnerText;
-                    _idLp = lpNode["erp:ID_LP"].InnerText;
+
+
+                    if (xnlp != null)
+                    {
+                        idLP xidLp = new idLP();
+                        xidLp._idLp = xnlp["erp:ID_LP_Zdroj"].InnerText;
+                        xidLp._idLpZdroj = xnlp["erp:ID_LP"].InnerText;
+
+                        idLp.Add(xidLp);
+                    }
                 }
             }
             XmlNode ZpravaList = xml.SelectSingleNode("soap:Envelope/soap:Body/erp:ZalozeniPredpisuOdpoved/erp:Zprava", nsmgr);
