@@ -44,7 +44,7 @@ namespace eRECEPT
         //ID lékaře od SUKLu
         public string LekarIdErp { get; set; }
         internal string verze { get; set; } = "201704A";
-        public string SwKlienta { get; set; } = "DrDataNET123";
+        public string SwKlienta { get; set; } = "DRDATANET100";
 
         internal DateTime _DatumVystaveni;
         internal String _Dop_Jmeno_Jmena;
@@ -1173,7 +1173,7 @@ namespace eRECEPT
 
         int? _opakovani; public int? opakovani { get { return _opakovani; } }
 
-        String _lekarId; public string lekarId { get { return _lekarId; } }
+        String _lekarId; public string lekarId { get { return _lekarId.ToUpper(); } }
         UpozornitLekare _upozornitLekare; public UpozornitLekare upozornitLekare { get { return _upozornitLekare; } }
         StavElektronickehoReceptu _stav; public StavElektronickehoReceptu stav { get { return _stav; } }
         internal ZalozitRecept(Recept build)
