@@ -56,21 +56,21 @@ namespace TestErecept
             }
 
 
-            PredpisLP lek,lek2;
+            PredpisLP lek, lek2;
             lek = new PredpisLP();
             lek2 = new PredpisLP();
 
             SlozkyLP slozky;
             slozky = new SlozkyLP();
-            slozky.mnozstvi(5);
-            slozky.nazev("Ac. salic");
+            slozky.mnozstviSlozky(5);
+            slozky.nazevSlozky("Ac. salic");
             slozky.jednotka(Jednotka.g);
-            //slozky.surovina("9000006");
+            //slozky.surovinaSlozky("9000006");
 
             SlozkyLP slozky2;
             slozky2 = new SlozkyLP();
-            slozky2.mnozstvi(100);
-            slozky2.nazev("Vaselini ad");
+            slozky2.mnozstviSlozky(100);
+            slozky2.nazevSlozky("Vaselini ad");
             slozky2.jednotka(Jednotka.g);
 
 
@@ -82,9 +82,9 @@ namespace TestErecept
             //lek.baleni("21 II");
             lek.cestapodani("IHN");
 
-            lek.postupPripravy("Smíchej, ať vznikne mast");
+            lek.postupPripravyLeku("Smíchej, ať vznikne mast");
             lek.nazev("Mast na ztvrdlou kůži");
-            
+
 
             lek.diagnoza("I10");
             lek.navod("3x denně potírat postižené místo");
@@ -102,7 +102,7 @@ namespace TestErecept
             lek2.forma("TBL FLM");
             lek2.baleni("30");
             lek2.cestapodani("POR");
-            lek2.diagnoza("I10");
+            //lek2.diagnoza("I10");
             lek2.navod("Pacient poučen,vydat pouze do vlastních rukou pacienta,prosím ověřit totožnost");
             lek2.mnozstvi(3);
             lek2.druhLeku(DruhLeku.REGISTROVANY);
@@ -113,7 +113,7 @@ namespace TestErecept
 
             lek.Slozka(slozky);
             lek.Slozka(slozky2);
-          
+
 
             ZalozitRecept _recept;
             _recept = ZalozitRecept.Recept()
@@ -121,10 +121,9 @@ namespace TestErecept
                 .Pkcs12Password("1234")
                 .GlobalCertificate(zdroj.suklTEST00000910487)
                 .GlobalPass("Test1234")
+                .userPass("Test1234")
                 .prostredi(Prostredi.TEST)
                 .odeslano(DateTime.Now)
-          
-
             .datumVystaveni(DateTime.Now)
             .rodina(Rodina.NE)
             .opakovani(3)
@@ -139,7 +138,10 @@ namespace TestErecept
             .zpId("207")
             .pacientTelefon("776085686")
             .pacientEmail("mira@alt64.cz")
+            
+       
             .notifikace(Notifikace.EMAIL)
+
             .pacientVeznice("Pracovní činnost")
             .pacientHmotnost(200)
             .pohlavi(Pohlavi.M)
@@ -176,13 +178,13 @@ namespace TestErecept
 
                 idDokladuPodani = zprep.idDokladuPodani;
                 idZpravyPodani = zprep.idZpravyPodani;
-                
-                if (zprep.chyba==true)
+
+                if (zprep.chyba == true)
                 {
                     Console.WriteLine(zprep.doporuceni);
                 }
                 //XmlDocument xml = new XmlDocument();
-                
+
 
                 //xml.LoadXml(odpoved);
                 //var nsmgr = new XmlNamespaceManager(xml.NameTable);

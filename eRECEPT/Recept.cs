@@ -18,7 +18,7 @@ using System.Xml.Linq;
 namespace eRECEPT
 {
 
-    public enum Notifikace { EMAIL = 0, SMS = 1 }
+    public enum Notifikace { EMAIL = 0, SMS = 1, BEZNOTIFIKACE = 99 }
     public enum Pohlavi { M = 0, F = 1 }
     public enum Jednotka { g = 0, ks = 1 }
     public enum StavElektronickehoReceptu { KE_SCHVALENI = 0, ZAMITNUTY = 1, PREDEPSANY = 2, PRIPRAVOVANY = 3, CASTECNE_VYDANY = 4, PLNE_VYDANY = 5, NEDOKONCENY_VYDEJ = 6, UZAVRENY = 7 }
@@ -33,6 +33,7 @@ namespace eRECEPT
         internal String _pkcs12password;
         internal byte[] _globalCertificate;
         internal String _globalPass;
+        internal String _userPass;
         internal RSACryptoServiceProvider _key;
         internal X509Certificate2 _certificate;
         internal Guid _uuid_zpravy = Guid.NewGuid();
@@ -41,7 +42,7 @@ namespace eRECEPT
         internal List<PredpisLP> _predpisLP = new List<PredpisLP>();
         internal string _IdZpravy { get; set; }
         //ID lékaře od SUKLu
-        public string LekarId { get; set; }
+        public string LekarIdErp { get; set; }
         internal string verze { get; set; } = "201704A";
         public string SwKlienta { get; set; } = "DrDataNET123";
 
@@ -281,6 +282,7 @@ namespace eRECEPT
         {
             if (val == 0) return notifikace(Notifikace.EMAIL);
             else if (val == 1) return notifikace(Notifikace.SMS);
+            else if (val == 9) return notifikace(Notifikace.BEZNOTIFIKACE);
             else throw new ArgumentException("Notifikace mohou nabývat hodnota 0 a 1");
         }
         public Recept notifikace(Notifikace val)
@@ -376,6 +378,11 @@ namespace eRECEPT
         public Recept GlobalPass(String Password)
         {
             _globalPass = Password;
+            return this;
+        }
+        public Recept userPass(String val)
+        {
+            _userPass = val;
             return this;
         }
         public AppPingZep Ping()
@@ -481,7 +488,7 @@ namespace eRECEPT
         }
         public Recept lekarId(String val)
         {
-            LekarId = val;
+            LekarIdErp = val;
             return this;
         }
         public Recept lekarIcp(String val)
@@ -525,6 +532,7 @@ namespace eRECEPT
             Zruseni_duvodzruseni = val;
             return this;
         }
+     
         public AppPingZep recept()
         {
             return new AppPingZep(this);
@@ -632,17 +640,17 @@ namespace eRECEPT
         internal List<SlozkyLP> _slozkyLP = new List<SlozkyLP>();
 
 
-        public int Mnozstvi { get { return _Mnozstvi; } set { _Mnozstvi = value; } }
-        public string Navod { get { return _Navod; } set { if (value.Length <= 80 && value.Length >= 1) { _Navod = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public int Nezamenovat { get { return _Nezamenovat; } set { _Nezamenovat = value; } }
+        public int MnozstviLeku { get { return _Mnozstvi; } set { _Mnozstvi = value; } }
+        public string NavodLeku { get { return _Navod; } set { if (value.Length <= 80 && value.Length >= 1) { _Navod = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public int NezamenovatLek { get { return _Nezamenovat; } set { _Nezamenovat = value; } }
         public int Prekroceni { get { return _Prekroceni; } set { _Prekroceni = value; } }
         public string ZadankaZP { get { return _ZadankaZP; } set { if (value.Length <= 8) { _ZadankaZP = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Diagnoza_kod { get { return _Diagnoza_kod; } set { if (value.Length <= 5) { _Diagnoza_kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Atc_kod { get { return _atc_kod; } set { if (value.Length <= 7) { _atc_kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public string Kod { get { return _kod; } set { if (value.Length <= 7) { _kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public string Nazev { get { return _nazev; } set { if (value.Length <= 146) { _nazev = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public string Forma { get { return _forma; } set { if (value.Length <= 27) { _forma = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public string Sila { get { return _sila; } set { if (value.Length <= 24) { _sila = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public string Kod_leku { get { return _kod; } set { if (value.Length <= 7) { _kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public string NazevLeku { get { return _nazev; } set { if (value.Length <= 146) { _nazev = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public string FormaLeku { get { return _forma; } set { if (value.Length <= 27) { _forma = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public string SilaLeku { get { return _sila; } set { if (value.Length <= 24) { _sila = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Cesta_podani { get { return _cesta_podani; } set { if (value.Length <= 15) { _cesta_podani = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Hvlpreg_baleni { get { return _baleni; } set { if (value.Length <= 22) { _baleni = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Idlp { get { return _Idlp; } set { if (value.Length <= 36) { Idlp = value; } else { throw new ArgumentOutOfRangeException(); } } }
@@ -652,8 +660,10 @@ namespace eRECEPT
         public string IdDokladuNew { get { return _IdDokladuNew; } set { if (value.Length < 13) { _IdDokladuNew = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Pridruzenadiagnoza_kod { get { return _Pridruzenadiagnoza_kod; } set { if (value.Length <= 5) { _Pridruzenadiagnoza_kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Postuppripravy { get { return _postuppripravy; } set { if (value.Length <= 4000) { _postuppripravy = value; } else { throw new ArgumentOutOfRangeException(); } } }
+        public string UhradaLeku { get { return uhradaText(_uhrada); } }
 
-        public int idPolozky { get { return _IdLpZdroj; } set { _IdLpZdroj = value; } }
+
+        public int idPolozkyLeku { get { return _IdLpZdroj; } set { _IdLpZdroj = value; } }
 
         public List<SlozkyLP> SlozkyLP
         {
@@ -680,7 +690,16 @@ namespace eRECEPT
             _uhrada = val;
             return this;
         }
-
+        public String uhradaText(Uhrada val)
+        {
+            if (val == Uhrada.PACIENT) return "Pacient";
+            else if (val == Uhrada.ZVYSENA) return "Zvýšená";
+            else if (val == Uhrada.ZAKLADNI) return "Základní";
+            else if (val == Uhrada.PACIENT_ZAM) return "Zaměstnavatel pacienta";
+            else if (val == Uhrada.ZAKLADNI_ZAM) return "Zaměstnavatel základní";
+            else if (val == Uhrada.ZVYSENA_ZAM) return "Zaměstnavatel zvýšená";
+            else throw new ArgumentException("Může nabývat hodnota jen podle úhrady");
+        }
 
         public PredpisLP uhrada(int val)
         {
@@ -719,12 +738,12 @@ namespace eRECEPT
 
         public PredpisLP navod(String val)
         {
-            Navod = val;
+            NavodLeku = val;
             return this;
         }
         public PredpisLP mnozstvi(int val)
         {
-            Mnozstvi = val;
+            MnozstviLeku = val;
             return this;
 
         }
@@ -772,17 +791,17 @@ namespace eRECEPT
         }
         public PredpisLP idpolozky(int v)
         {
-            idPolozky = v;
+            idPolozkyLeku = v;
             return this;
         }
 
         public PredpisLP nezamenovat(int v)
         {
-            Nezamenovat = v;
+            NezamenovatLek = v;
             return this;
         }
 
-        public PredpisLP postupPripravy(string v)
+        public PredpisLP postupPripravyLeku(string v)
         {
             Postuppripravy = v;
             return this;
@@ -823,21 +842,21 @@ namespace eRECEPT
             return jednotka(int.Parse(val));
         }
 
-        public SlozkyLP mnozstvi(double val)
+        public SlozkyLP mnozstviSlozky(double val)
         {
             Mnozstvi = val;
             return this;
 
         }
 
-        public SlozkyLP nazev(string val)
+        public SlozkyLP nazevSlozky(string val)
         {
             Nazev = val;
             return this;
 
         }
 
-        public SlozkyLP surovina(string val)
+        public SlozkyLP surovinaSlozky(string val)
         {
             Surovina = val;
             return this;
@@ -856,6 +875,8 @@ namespace eRECEPT
         DateTime _Odeslano; public DateTime Odeslano { get { return _Odeslano; } }
         String _Verze; public String Verze { get { return _Verze; } }
         String _globalPass; public String GlobalPass { get { return _globalPass; } }
+
+        String _userPass; public String UserPass { get { return _userPass; } }
         RSACryptoServiceProvider _key; RSACryptoServiceProvider key { get { return _key; } }
         Prostredi? _prostredi; public Prostredi? prostredi { get { return _prostredi; } }
 
@@ -883,14 +904,15 @@ namespace eRECEPT
             _Odeslano = build._Odeslano;
             _globalCertificate = build._globalCertificate;
             _globalPass = build._globalPass;
+            _userPass = build._userPass;
             _prostredi = build._prostredi;
             _datumVystaveni = build._DatumVystaveni;
             _IdDokladuNew = build.IdDokladuNew;
             _autorizacniKod = build._autorizacniKod;
             _duvodZruseni = build.Zruseni_duvodzruseni;
-            _uzivatel = build.LekarId;
+            _uzivatel = build.LekarIdErp;
             _pracoviste = build.Pred_pzs;
-            _lekarId = build.LekarId;
+            _lekarId = build.LekarIdErp;
 
             if (build._pkcs12bytes != null)
             {
@@ -1037,8 +1059,8 @@ namespace eRECEPT
             }
 
 
-            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), GlobalPass.ToString());
-            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + GlobalPass.ToString()));
+            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), UserPass.ToString());
+            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + UserPass.ToString()));
             //enable minimal versions of TLS required by eRecept
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             ServicePointManager.Expect100Continue = true;
@@ -1046,7 +1068,7 @@ namespace eRECEPT
 
             byte[] content = UTF8Encoding.UTF8.GetBytes(requestBody);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(serviceUrl);
-
+            
 
 
             req.ContentType = "text/xml;charset=UTF-8";
@@ -1119,6 +1141,7 @@ namespace eRECEPT
         DateTime _Odeslano; public DateTime Odeslano { get { return _Odeslano; } }
         String _Verze; public String Verze { get { return _Verze; } }
         String _globalPass; public String GlobalPass { get { return _globalPass; } }
+        String _userPass; public String UserPass { get { return _userPass; } }
         RSACryptoServiceProvider _key; RSACryptoServiceProvider key { get { return _key; } }
         Prostredi? _prostredi; public Prostredi? prostredi { get { return _prostredi; } }
 
@@ -1163,6 +1186,7 @@ namespace eRECEPT
             _Odeslano = build._Odeslano;
             _globalCertificate = build._globalCertificate;
             _globalPass = build._globalPass;
+            _userPass = build._userPass;
             _prostredi = build._prostredi;
             _datumVystaveni = build._DatumVystaveni;
             _platnost = build._platnost;
@@ -1182,7 +1206,7 @@ namespace eRECEPT
             _vezeni = build.Pacient_Veznice;
             _hmotnost = build.Pacient_Hmotnost;
             _pohlavi = build.Pacient_Pohlavi;
-            _idLekare = build.LekarId;
+            _idLekare = build.LekarIdErp;
             _icp = build.Pred_icp;
             _pzs = build.Pred_pzs;
             _telefon = build.Pred_telefon;
@@ -1192,7 +1216,7 @@ namespace eRECEPT
             _upozornitLekare = build.UpozornitLekare;
             _stav = build.Stav;
             _opakovani = build.Opakovani;
-            _lekarId = build.LekarId;
+            _lekarId = build.LekarIdErp;
 
             if (build._pkcs12bytes != null)
             {
@@ -1212,6 +1236,8 @@ namespace eRECEPT
         {
             return new Recept();
         }
+
+
 
         public String GenerateSoapRequest()
         {
@@ -1241,12 +1267,12 @@ namespace eRECEPT
                     foreach (PredpisLP rec in predpisLP)
                     {
                         string lek = UTF8Encoding.UTF8.GetString(templates.ZalozeniPredpisuLek);
-                        if (rec.Mnozstvi != null) lek = lek.Replace("${mnozstvi}", rec.Mnozstvi.ToString());
-                        if (rec.Navod != null) lek = lek.Replace("${navod}", rec.Navod.ToString());
+                        if (rec.MnozstviLeku != null) lek = lek.Replace("${mnozstvi}", rec.MnozstviLeku.ToString());
+                        if (rec.NavodLeku != null) lek = lek.Replace("${navod}", rec.NavodLeku.ToString());
                         if (rec.Diagnoza_kod != null) lek = lek.Replace("${diagnoza}", rec.Diagnoza_kod.ToString());
                         if (rec._uhrada != null) lek = lek.Replace("${uhrada}", rec._uhrada.ToString());
                         if (rec._IdLpZdroj > 0) { lek = lek.Replace("${lpzdroj}", rec._IdLpZdroj.ToString()); } else { lek = lek.Replace("${lpzdroj}", pocetLeku.ToString()); }
-                        if (rec.Nezamenovat >= 0 && rec.Nezamenovat < 2) lek = lek.Replace("${nezamenovat}", rec.Nezamenovat.ToString());
+                        if (rec.NezamenovatLek >= 0 && rec.NezamenovatLek < 2) lek = lek.Replace("${nezamenovat}", rec.NezamenovatLek.ToString());
 
 
 
@@ -1256,11 +1282,11 @@ namespace eRECEPT
                         if (rec._druhLeku == DruhLeku.REGISTROVANY)
                         {
                             string pol = UTF8Encoding.UTF8.GetString(templates.ZalozeniPredpisuReg);
-                            if (rec.Kod != null) pol = pol.Replace("${kodSukl}", rec.Kod);
+                            if (rec.Kod_leku != null) pol = pol.Replace("${kodSukl}", rec.Kod_leku);
                             if (rec.Atc_kod != null) pol = pol.Replace("${atc}", rec.Atc_kod);
-                            if (rec.Nazev != null) pol = pol.Replace("${nazevLeku}", rec.Nazev);
-                            if (rec.Forma != null) pol = pol.Replace("${formaLeku}", rec.Forma);
-                            if (rec.Sila != null) pol = pol.Replace("${sila}", rec.Sila);
+                            if (rec.NazevLeku != null) pol = pol.Replace("${nazevLeku}", rec.NazevLeku);
+                            if (rec.FormaLeku != null) pol = pol.Replace("${formaLeku}", rec.FormaLeku);
+                            if (rec.SilaLeku != null) pol = pol.Replace("${sila}", rec.SilaLeku);
                             if (rec.Cesta_podani != null) pol = pol.Replace("${cestaPodani}", rec.Cesta_podani);
                             if (rec.Hvlpreg_baleni != null) pol = pol.Replace("${baleni}", rec.Hvlpreg_baleni);
                             lek = lek.Replace("${druhReceptu}", pol);
@@ -1417,8 +1443,8 @@ namespace eRECEPT
                 if (cisloPojistence != null) src = src.Replace("${cisloPojistence}", cisloPojistence);
                 if (kodPojistovny != null) src = src.Replace("${kodPojistovny}", kodPojistovny);
                 if (telefonPacient != null) src = src.Replace("${telefonPacienta}", telefonPacient);
-                if (emailPacient != null) src = src.Replace("${emailPacienta}", emailPacient);
-                if (notifikace != null) src = src.Replace("${notifikace}", notifikace.ToString());
+                if (emailPacient != null && notifikace != Notifikace.BEZNOTIFIKACE) src = src.Replace("${emailPacienta}", emailPacient);
+                if (notifikace != Notifikace.BEZNOTIFIKACE) src = src.Replace("${notifikace}", notifikace.ToString());
                 if (vezeni != null) src = src.Replace("${vezeni}", vezeni);
                 if (hmotnost != null) src = src.Replace("${hmotnost}", hmotnost.ToString());
                 if (pohlavi != null) src = src.Replace("${pohlavi}", pohlavi.ToString());
@@ -1463,8 +1489,8 @@ namespace eRECEPT
             }
 
 
-            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), GlobalPass.ToString());
-            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + GlobalPass.ToString()));
+            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), UserPass.ToString());
+            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + UserPass.ToString()));
             //enable minimal versions of TLS required by eRecept
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             ServicePointManager.Expect100Continue = true;
@@ -1560,6 +1586,8 @@ namespace eRECEPT
         String _Verze; public String Verze { get { return _Verze; } }
 
         String _globalPass; public String GlobalPass { get { return _globalPass; } }
+
+        String _userPass; public String UserPass { get { return _userPass; } }
         RSACryptoServiceProvider _key; RSACryptoServiceProvider key { get { return _key; } }
 
         Prostredi? _prostredi; public Prostredi? prostredi { get { return _prostredi; } }
@@ -1575,8 +1603,9 @@ namespace eRECEPT
             _Odeslano = build._Odeslano;
             _globalCertificate = build._globalCertificate;
             _globalPass = build._globalPass;
+            _userPass = build._userPass;
             _prostredi = build._prostredi;
-            _lekarId = build.LekarId;
+            _lekarId = build.LekarIdErp;
 
 
             if (build._pkcs12bytes != null)
@@ -1779,8 +1808,8 @@ namespace eRECEPT
             }
 
 
-            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), GlobalPass.ToString());
-            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + GlobalPass.ToString()));
+            NetworkCredential cred = new NetworkCredential(lekarId.ToString(), UserPass.ToString());
+            String encoded = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(lekarId.ToString() + ":" + UserPass.ToString()));
             //enable minimal versions of TLS required by eRecept
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             ServicePointManager.Expect100Continue = true;
@@ -1871,7 +1900,7 @@ namespace eRECEPT
         internal string _popis; public string popis { get { return _popis; } }
         internal string _doporuceni; public string doporuceni { get { return _doporuceni; } }
         internal string _idDokladuPodani; public string idDokladuPodani { get { return _idDokladuPodani; } }
-        internal List<idLP> _idLp; public List<idLP> idLp { get { return _idLp; } }
+        internal List<idLP> _idLp; public List<idLP> idLpList { get { return _idLp; } }
         internal string _idZpravyPodani; public string idZpravyPodani { get { return _idZpravyPodani; } }
         internal string _idPodani; public string idPodani { get { return _idPodani; } }
         internal DateTime _prijato; public DateTime prijato { get { return _prijato; } }
@@ -1910,9 +1939,21 @@ namespace eRECEPT
                 _obsahChyby = chybaList["faultstring"].InnerText;
 
                 XmlNode detailList = xml.SelectSingleNode("soap:Envelope/soap:Body/soap:Fault/detail/erp:Chyba", nsmgr);
-                _kodChyby = detailList["erp:Kod"].InnerText;
-                _popis = detailList["erp:Popis"].InnerText;
-                _doporuceni = detailList["erp:Doporuceni"].InnerText;
+                try
+                {
+                    _kodChyby = detailList["erp:Kod"].InnerText;
+                    _popis = detailList["erp:Popis"].InnerText;
+                    _doporuceni = detailList["erp:Doporuceni"].InnerText;
+                }
+                catch
+                {
+                    _kodChyby = "";
+                    _popis = _obsahChyby;
+                    _doporuceni = "";
+                }
+        
+               
+            
                 return this;
             }
 
@@ -1936,14 +1977,22 @@ namespace eRECEPT
                         xidLp._idLp = xnlp["erp:ID_LP_Zdroj"].InnerText;
                         xidLp._idLpZdroj = xnlp["erp:ID_LP"].InnerText;
 
-                        idLp.Add(xidLp);
+                        idLpList.Add(xidLp);
                     }
                 }
             }
             XmlNode ZpravaList = xml.SelectSingleNode("soap:Envelope/soap:Body/erp:ZalozeniPredpisuOdpoved/erp:Zprava", nsmgr);
-            _idZpravyPodani = ZpravaList["erp:ID_Zpravy"].InnerText;
-            _idPodani = ZpravaList["erp:ID_Podani"].InnerText;
-            _prijato = DateTime.Parse(ZpravaList["erp:Prijato"].InnerText);
+            try
+            {
+                _idZpravyPodani = ZpravaList["erp:ID_Zpravy"].InnerText;
+                _idPodani = ZpravaList["erp:ID_Podani"].InnerText;
+                _prijato = DateTime.Parse(ZpravaList["erp:Prijato"].InnerText);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
 
 
 
