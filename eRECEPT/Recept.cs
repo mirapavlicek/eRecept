@@ -27,6 +27,7 @@ namespace eRECEPT
     public enum Prostredi { TEST = 0, PRODUKCE = 1 }
     public enum DruhLeku { REGISTROVANY = 0, NEREGISTROVANY = 1, INDIVIDUALNI = 2 }
     public enum Rodina { NE = 0, ANO = 1 }
+    public enum DruhPojisteni { VEREJNE=0,SMLUVI_PRIPOJISTENI=1,CESTOVNI_PRIPOJISTENI=2,POJISTENI_EU=3}
     public class Recept
     {
         internal byte[] _pkcs12bytes;
@@ -43,7 +44,7 @@ namespace eRECEPT
         internal string _IdZpravy { get; set; }
         //ID lékaře od SUKLu
         public string LekarIdErp { get; set; }
-        internal string verze { get; set; } = "201704A";
+        internal string verze { get; set; } = "201704B";
         public string SwKlienta { get; set; } = "DRDATANET100";
 
         internal DateTime _DatumVystaveni;
@@ -160,6 +161,8 @@ namespace eRECEPT
         internal StavElektronickehoReceptu Stav = StavElektronickehoReceptu.PREDEPSANY;
         //příznak akceptace upozornění lékaře od lékárníka přes CÚeR
         internal UpozornitLekare UpozornitLekare = UpozornitLekare.PRISTI_NAVSTEVA;
+        //příznak druhu pojisteni
+        internal DruhPojisteni DruhPojisteni = DruhPojisteni.VEREJNE;
         internal DateTime? VypisDo { get; set; }
         internal DateTime Zalozeni { get; set; }
         internal DateTime Zmena { get; set; }
@@ -252,6 +255,27 @@ namespace eRECEPT
         public Recept stav(StavElektronickehoReceptu val)
         {
             Stav = val;
+            return this;
+        }
+
+        //Druh pojisteni
+     
+        public Recept druhPojisteni(String val)
+        {
+            return druhPojisteni(int.Parse(val));
+        }
+        public Recept druhPojisteni(int val)
+        {
+            if (val == 0) return druhPojisteni(DruhPojisteni.VEREJNE);
+            else if (val == 1) return druhPojisteni(DruhPojisteni.SMLUVI_PRIPOJISTENI);
+            else if (val == 2) return druhPojisteni(DruhPojisteni.CESTOVNI_PRIPOJISTENI);
+            else if (val == 3) return druhPojisteni(DruhPojisteni.POJISTENI_EU);
+            
+            else throw new ArgumentException("Stav receptu může být 0 až 3");
+        }
+        public Recept druhPojisteni(DruhPojisteni val)
+        {
+            DruhPojisteni = val;
             return this;
         }
 
@@ -1002,7 +1026,7 @@ namespace eRECEPT
             if (val == Prostredi.TEST)
                 return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
             else
-                return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
+                return "https://lekar-soap.erecept.sukl.cz/cuer/Lekar";
         }
 
         private String replacePlaceholders(String src, String digest, string signature)
@@ -1176,6 +1200,7 @@ namespace eRECEPT
         String _lekarId; public string lekarId { get { return _lekarId.ToUpper(); } }
         UpozornitLekare _upozornitLekare; public UpozornitLekare upozornitLekare { get { return _upozornitLekare; } }
         StavElektronickehoReceptu _stav; public StavElektronickehoReceptu stav { get { return _stav; } }
+        DruhPojisteni _druhPojisteni; public DruhPojisteni druhPojisteni { get{ return _druhPojisteni; } }
         internal ZalozitRecept(Recept build)
         {
             _certificate = build._certificate;
@@ -1215,6 +1240,7 @@ namespace eRECEPT
             _poznamka = build.Pozn;
             _upozornitLekare = build.UpozornitLekare;
             _stav = build.Stav;
+            _druhPojisteni = build.DruhPojisteni;
             _opakovani = build.Opakovani;
             _lekarId = build.LekarIdErp;
 
@@ -1456,6 +1482,7 @@ namespace eRECEPT
                 if (poznamka != null) src = src.Replace("${poznamka}", poznamka);
                 if (upozornitLekare != null) src = src.Replace("${upozornitLekare}", upozornitLekare.ToString());
                 if (stav != null) src = src.Replace("${stav}", stav.ToString());
+                if (druhPojisteni != null) src = src.Replace("${druhPojisteni}", druhPojisteni.ToString());
                 if (opakovani > 0) src = src.Replace("${opakovani}", opakovani.ToString());
 
                 return src;
@@ -1564,7 +1591,7 @@ namespace eRECEPT
             if (val == Prostredi.TEST)
                 return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
             else
-                return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
+                return "https://lekar-soap.erecept.sukl.cz/cuer/Lekar";
         }
     }
 
@@ -1888,7 +1915,7 @@ namespace eRECEPT
             if (val == Prostredi.TEST)
                 return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
             else
-                return "https://lekar-soap.test-erecept.sukl.cz/cuer/Lekar";
+                return "https://lekar-soap.erecept.sukl.cz/cuer/Lekar";
         }
     }
 

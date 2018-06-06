@@ -49,6 +49,7 @@
     <v2301:Pozn>${poznamka}</v2301:Pozn>
     <v2301:UpozornitLekare>${upozornitLekare}</v2301:UpozornitLekare>
     <v2301:Stav>${stav}</v2301:Stav>
+    <v2301:DruhPojisteni>${druhPojisteni}</v2301:DruhPojisteni>
   </v230:Doklad>
   <v230:Zprava>
     <v2301:ID_Zpravy>${IdZpravy}</v2301:ID_Zpravy>
