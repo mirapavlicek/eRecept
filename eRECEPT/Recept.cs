@@ -535,6 +535,53 @@ namespace eRECEPT
             Pred_odbornost_kod = val;
             return this;
         }
+        public Recept doporucujiciPrijmeni(String val)
+        {
+            Dop_Jmeno_Prijmeni = val;
+            return this;
+           
+        }
+        public Recept doporucujiciJmeno(String val)
+        {
+            Dop_Jmeno_Jmena = val;
+            return this;
+        }
+        public Recept doporucujiciNazevPzs(String val)
+        {
+            Dop_Pzs_Nazev = val;
+            return this;
+        }
+        public Recept doporucujiciIcz(String val)
+        {
+
+            Dop_Pzs_Icz = val;
+            return this;
+        }
+        public Recept doporucujiciIcp(String val)
+        {
+            Dop_Pzs_Icp = val;
+            return this;
+        }
+        public Recept doporucujiciIc(String val)
+        {
+            Dop_Pzs_Ic = val;
+            return this;
+        }
+        public Recept doporucujiciDic(String val)
+        {
+            Dop_Pzs_Dic = val;
+            return this;
+        }
+        public Recept doporucujiciTelefon(String val)
+        {
+            Dop_Pzs_Telefon = val;
+            return this;
+        }
+        public Recept doporucujiciOdbornost(String val)
+        {
+            Dop_Odbornost_Kod = val;
+            return this;
+        }
         public Recept poznamka(String val)
         {
             Pozn = val;
@@ -1192,6 +1239,16 @@ namespace eRECEPT
         String _pzs; public string pzs { get { return _pzs; } }
         String _telefon; public string telefon { get { return _telefon; } }
         String _odb; public string odb { get { return _odb; } }
+
+        String _doporucujiciPrijmeni; public string doporucujiciPrijmeni { get { return _doporucujiciPrijmeni; } }
+        String _doporucujiciJmena; public string doporucujiciJmena { get { return _doporucujiciJmena; } }
+        String _doporucujiciNazevPzs; public string doporucujiciNazevPzs { get { return _doporucujiciNazevPzs; } }
+        String _doporucujiciIcz; public string doporucujiciIcz { get { return _doporucujiciIcz; } }
+        String _doporucujiciIcp; public string doporucujiciIcp { get { return _doporucujiciIcp; } }
+        String _doporucujiciIc; public string doporucujiciIc { get { return _doporucujiciIc; } }
+        String _doporucujiciDic; public string doporucujiciDic { get { return _doporucujiciDic; } }
+        String _doporucujiciTelefon; public string doporucujiciTelefon { get { return _doporucujiciTelefon; } }
+        String _doporucujiciOdbornost; public string doporucujiciOdbornost { get { return _doporucujiciOdbornost; } }
         List<PredpisLP> _predpisLP; public List<PredpisLP> predpisLP { get { return _predpisLP; } }
         String _poznamka; public string poznamka { get { return _poznamka; } }
 
@@ -1243,6 +1300,16 @@ namespace eRECEPT
             _druhPojisteni = build.DruhPojisteni;
             _opakovani = build.Opakovani;
             _lekarId = build.LekarIdErp;
+            _doporucujiciPrijmeni = build.Dop_Jmeno_Prijmeni;
+            _doporucujiciJmena = build.Dop_Jmeno_Jmena;
+            _doporucujiciNazevPzs = build.Dop_Pzs_Nazev;
+            _doporucujiciIcz = build.Dop_Pzs_Icz;
+            _doporucujiciIcp = build.Dop_Pzs_Icp;
+            _doporucujiciDic = build.Dop_Pzs_Dic;
+            _doporucujiciIc = build.Dop_Pzs_Ic;
+            _doporucujiciTelefon = build.Dop_Pzs_Telefon;
+            _doporucujiciOdbornost = build.Dop_Odbornost_Kod;
+
 
             if (build._pkcs12bytes != null)
             {
@@ -1484,6 +1551,16 @@ namespace eRECEPT
                 if (stav != null) src = src.Replace("${stav}", stav.ToString());
                 if (druhPojisteni != null) src = src.Replace("${druhPojisteni}", druhPojisteni.ToString());
                 if (opakovani > 0) src = src.Replace("${opakovani}", opakovani.ToString());
+                if (doporucujiciJmena != null) src = src.Replace("${doporucujiciJmena}", doporucujiciJmena.ToString());
+                if (doporucujiciPrijmeni != null) src = src.Replace("${doporucujiciPrijmeni}", doporucujiciPrijmeni.ToString());
+                if (doporucujiciNazevPzs != null) src = src.Replace("${doporucujiciNazevPZS}", doporucujiciNazevPzs.ToString());
+                if (doporucujiciIcz!= null) src = src.Replace("${doporucujiciIcz}", doporucujiciIcz.ToString());
+                if (doporucujiciIcp != null) src = src.Replace("${doporucujiciIcp}", doporucujiciIcp.ToString());
+                if (doporucujiciIc != null) src = src.Replace("${doporucujiciIc}", doporucujiciIc.ToString());
+                if (doporucujiciDic != null) src = src.Replace("${doporucujiciDic}", doporucujiciDic.ToString());
+                if (doporucujiciTelefon != null) src = src.Replace("${doporucujiciTelefon}", doporucujiciTelefon.ToString());
+                if (doporucujiciOdbornost != null) src = src.Replace("${doporucujiciOdbornost}", doporucujiciOdbornost.ToString());
+
 
                 return src;
             }

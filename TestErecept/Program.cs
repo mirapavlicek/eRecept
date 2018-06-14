@@ -153,7 +153,14 @@ namespace TestErecept
             .poznamka("Pacient použen, vydat pouze do vlastních rukou pacienta, prosím ověřit totožnost")
             .upozornitLekare(UpozornitLekare.PRISTI_NAVSTEVA)
             .stav(StavElektronickehoReceptu.PREDEPSANY)
-             .predespat(lek)
+            .doporucujiciJmeno("Zuzana")
+            .doporucujiciPrijmeni("Buriánková")
+            .doporucujiciNazevPzs("MUDr. Zuzana Buriánková - PLDD-Pediatrie")
+            .doporucujiciOdbornost("002")
+            .doporucujiciIcp("29718001")
+            .doporucujiciIc("29718001")
+            .doporucujiciTelefon("233930435")
+                         .predespat(lek)
              .predespat(lek2)
 
 

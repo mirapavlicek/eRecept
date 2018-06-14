@@ -42,6 +42,21 @@
       <v2301:Telefon>${telefon}</v2301:Telefon>
       <v2301:Odbornost>${odbornost}</v2301:Odbornost>
     </v2301:Predepisujici>
+    <v2301:Doporucujici>
+      <v2301:Jmeno>
+        <v2301:Prijmeni>${doporucujiciPrijmeni}</v2301:Prijmeni>
+        <v2301:Jmena>${doporucujiciJmena}</v2301:Jmena>
+     </v2301:Jmeno>
+      <v2301:PZS>
+        <v2301:Nazev>${doporucujiciNazevPZS}</v2301:Nazev>
+        <v2301:ICZ>${doporucujiciIcz}</v2301:ICZ>
+        <v2301:ICP>${doporucujiciIcp}</v2301:ICP>
+        <v2301:IC>${doporucujiciIc}</v2301:IC>
+        <v2301:DIC>${doporucujiciDic}</v2301:DIC>
+        <v2301:Telefon>${doporucujiciTelefon}</v2301:Telefon>
+      </v2301:PZS>
+      <v2301:Odbornost>${doporucujiciOdbornost}</v2301:Odbornost>
+    </v2301:Doporucujici>
     <!--1 to 2 repetitions:-->
    ${lek1}
    ${lek2}
