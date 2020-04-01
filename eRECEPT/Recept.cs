@@ -44,7 +44,7 @@ namespace eRECEPT
         internal string _IdZpravy { get; set; }
         //ID lékaře od SUKLu
         public string LekarIdErp { get; set; }
-        internal string verze { get; set; } = "201704B";
+        internal string verze { get; set; } = "201704C";
         public string SwKlienta { get; set; } = "DRDATANET100";
 
         internal DateTime _DatumVystaveni;
@@ -708,6 +708,7 @@ namespace eRECEPT
         internal string _Pridruzenadiagnoza_kod;
         internal string _postuppripravy;
         internal int _IdLpZdroj;
+        internal string _iplpForma;
         internal List<SlozkyLP> _slozkyLP = new List<SlozkyLP>();
 
 
@@ -731,7 +732,9 @@ namespace eRECEPT
         public string IdDokladuNew { get { return _IdDokladuNew; } set { if (value.Length < 13) { _IdDokladuNew = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Pridruzenadiagnoza_kod { get { return _Pridruzenadiagnoza_kod; } set { if (value.Length <= 5) { _Pridruzenadiagnoza_kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Postuppripravy { get { return _postuppripravy; } set { if (value.Length <= 4000) { _postuppripravy = value; } else { throw new ArgumentOutOfRangeException(); } } }
-        public string UhradaLeku { get { return uhradaText(_uhrada); } }
+        public string UhradaLeku { get { return uhradaText(_uhrada); }}
+
+        public string IplpFormaLeku { get { return _iplpForma; } set { if (value.Length <= 28) { _iplpForma = value; } else { throw new ArgumentOutOfRangeException(); } } }
 
 
         public int idPolozkyLeku { get { return _IdLpZdroj; } set { _IdLpZdroj = value; } }
@@ -875,6 +878,13 @@ namespace eRECEPT
         public PredpisLP postupPripravyLeku(string v)
         {
             Postuppripravy = v;
+            return this;
+        }
+
+
+        public PredpisLP IplpForma(string v)
+        {
+            IplpFormaLeku = v;
             return this;
         }
 
@@ -1390,6 +1400,7 @@ namespace eRECEPT
                             if (rec._postuppripravy != null) iplp = iplp.Replace("${postupPripravy}", rec._postuppripravy);
                             if (rec._nazev != null) iplp = iplp.Replace("${nazev}", rec._nazev);
                             if (rec._cesta_podani != null) iplp = iplp.Replace("${cesta}", rec._cesta_podani);
+                            if (rec._iplpForma != null) iplp = iplp.Replace("${iplpForma}", rec._iplpForma);
 
                             int pocetSlozek = 1;
                             foreach (SlozkyLP slozka in rec.SlozkyLP)

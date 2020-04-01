@@ -2,6 +2,7 @@
             <v2301:PostupPripravy>${postupPripravy}</v2301:PostupPripravy>
             <v2301:Nazev>${nazev}</v2301:Nazev>
             <v2301:CestaPodani>${cesta}</v2301:CestaPodani>
+            <v2301:IplpForma>${iplpForma}</v2301:IplpForma>
             ${slozka1}
             ${slozka2}
             ${slozka3}
