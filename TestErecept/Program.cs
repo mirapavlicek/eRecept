@@ -139,8 +139,9 @@ namespace TestErecept
             .pacientTelefon("776085686")
             .pacientEmail("mira@alt64.cz")
             
-       
-            .notifikace(Notifikace.EMAIL)
+                .notifikace(Notifikace.EMAIL)
+          
+            
 
             .pacientVeznice("Pracovní činnost")
             .pacientHmotnost(200)

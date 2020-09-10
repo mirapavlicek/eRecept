@@ -44,7 +44,7 @@ namespace eRECEPT
         internal string _IdZpravy { get; set; }
         //ID lékaře od SUKLu
         public string LekarIdErp { get; set; }
-        internal string verze { get; set; } = "201704B";
+        internal string verze { get; set; } = "201704D";
         public string SwKlienta { get; set; } = "DRDATANET100";
 
         internal DateTime _DatumVystaveni;
@@ -97,7 +97,7 @@ namespace eRECEPT
         //způsob notifikace paceinta
         internal Notifikace Pacient_Notifikace = Notifikace.EMAIL;
         internal string Pacient_Veznice;
-        internal Pohlavi Pacient_Pohlavi = Pohlavi.M; //pohlací pacienta
+        internal Pohlavi Pacient_Pohlavi = Pohlavi.M; //pohlaví pacienta
         internal string Pacient_Telefon;
         internal int? Papirovy { get; set; } //příznak digitalizovaného předpisu (digitalizované předpisy nemají uvedené položky)
         internal DateTime PlatnostDo { get; set; } //platnost předpisu do
@@ -196,7 +196,9 @@ namespace eRECEPT
         }
         public Recept predespat(PredpisLP value)
         {
-            PredpisLP.Add(value);
+                    PredpisLP.Add(value);
+         
+            
             return this;
         }
 
@@ -707,6 +709,7 @@ namespace eRECEPT
         internal string _IdDokladuNew;
         internal string _Pridruzenadiagnoza_kod;
         internal string _postuppripravy;
+        internal string _iplpForma;
         internal int _IdLpZdroj;
         internal List<SlozkyLP> _slozkyLP = new List<SlozkyLP>();
 
@@ -731,6 +734,9 @@ namespace eRECEPT
         public string IdDokladuNew { get { return _IdDokladuNew; } set { if (value.Length < 13) { _IdDokladuNew = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Pridruzenadiagnoza_kod { get { return _Pridruzenadiagnoza_kod; } set { if (value.Length <= 5) { _Pridruzenadiagnoza_kod = value; } else { throw new ArgumentOutOfRangeException(); } } }
         public string Postuppripravy { get { return _postuppripravy; } set { if (value.Length <= 4000) { _postuppripravy = value; } else { throw new ArgumentOutOfRangeException(); } } }
+
+        public string iplpForma { get { return _iplpForma; } set { if (value.Length <= 27) { _iplpForma = value; } else { throw new ArgumentOutOfRangeException(); } } }
+
         public string UhradaLeku { get { return uhradaText(_uhrada); } }
 
 
@@ -875,6 +881,12 @@ namespace eRECEPT
         public PredpisLP postupPripravyLeku(string v)
         {
             Postuppripravy = v;
+            return this;
+        }
+
+        public PredpisLP iplpFormaLeku(string v)
+        {
+            iplpForma = v;
             return this;
         }
 
@@ -1258,6 +1270,8 @@ namespace eRECEPT
         UpozornitLekare _upozornitLekare; public UpozornitLekare upozornitLekare { get { return _upozornitLekare; } }
         StavElektronickehoReceptu _stav; public StavElektronickehoReceptu stav { get { return _stav; } }
         DruhPojisteni _druhPojisteni; public DruhPojisteni druhPojisteni { get{ return _druhPojisteni; } }
+
+       
         internal ZalozitRecept(Recept build)
         {
             _certificate = build._certificate;
@@ -1325,6 +1339,8 @@ namespace eRECEPT
 
         }
 
+     
+
         public static Recept Recept()
         {
             return new Recept();
@@ -1390,6 +1406,7 @@ namespace eRECEPT
                             if (rec._postuppripravy != null) iplp = iplp.Replace("${postupPripravy}", rec._postuppripravy);
                             if (rec._nazev != null) iplp = iplp.Replace("${nazev}", rec._nazev);
                             if (rec._cesta_podani != null) iplp = iplp.Replace("${cesta}", rec._cesta_podani);
+                            if (rec._iplpForma != null) iplp = iplp.Replace("${iplpForma}", rec._iplpForma);
 
                             int pocetSlozek = 1;
                             foreach (SlozkyLP slozka in rec.SlozkyLP)
