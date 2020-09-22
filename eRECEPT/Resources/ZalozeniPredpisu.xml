@@ -17,24 +17,30 @@
           <v2301:CisloPopisne>${cisloPopisne}</v2301:CisloPopisne>
           <v2301:NazevObce>${nazevObce}</v2301:NazevObce>
           <v2301:PSC>${psc}</v2301:PSC>
+          
         </v2301:Adresa>
       </v2301:Totoznost>
       <v2301:CP>${cisloPojistence}</v2301:CP>
       <!--Optional:-->
       <v2301:ZP>${kodPojistovny}</v2301:ZP>
       <!--Optional:-->
+      
+      <!--Optional:-->
       <v2301:Telefon>${telefonPacienta}</v2301:Telefon>
       <!--Optional:-->
       <v2301:Email>${emailPacienta}</v2301:Email>
+     
       <!--Optional:-->
-      <v2301:Notifikace>${notifikace}</v2301:Notifikace>
+       <v2301:Notifikace>${notifikace}</v2301:Notifikace>
       <!--Optional:-->
       <v2301:Veznice>${vezeni}</v2301:Veznice>
       <!--Optional:-->
       <v2301:Hmotnost>${hmotnost}</v2301:Hmotnost>
       <!--Optional:-->
       <v2301:Pohlavi>${pohlavi}</v2301:Pohlavi>
+      <v2301:KontaktniAdresa>${kontaktniAdresa}</v2301:KontaktniAdresa>
     </v2301:Pacient>
+    
     <v2301:Predepisujici>
       <v2301:Lekar>${idLekare}</v2301:Lekar>
       <v2301:ICP>${icp}</v2301:ICP>

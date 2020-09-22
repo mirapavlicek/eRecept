@@ -178,6 +178,7 @@ namespace eRECEPT
         internal string Adresa_psc;
         internal string Adresa_ulice;
         internal string _autorizacniKod;
+        internal string Kontaktni_adresa;
 
 
         internal DateTime DatumNarozeni { get; set; }
@@ -500,6 +501,11 @@ namespace eRECEPT
         {
 
             Pacient_Email = val;
+            return this;
+        }
+        public Recept kontaktniAdresa(string val)
+        {
+            Kontaktni_adresa = val;
             return this;
         }
         public Recept pacientVeznice(String val)
@@ -1242,6 +1248,7 @@ namespace eRECEPT
         string _kodPojistovny; public string kodPojistovny { get { return _kodPojistovny; } }
         string _telefonPacient; public string telefonPacient { get { return _telefonPacient; } }
         string _emailPacient; public string emailPacient { get { return _emailPacient; } }
+        string _kontaktniAdresa; public string kontaktniAdresa { get{ return _kontaktniAdresa; } }
         Notifikace _notifikace; public Notifikace notifikace { get { return _notifikace; } }
         string _vezeni; public string vezeni { get { return _vezeni; } }
         double? _hmotnost; public double? hmotnost { get { return _hmotnost; } }
@@ -1298,6 +1305,7 @@ namespace eRECEPT
             _kodPojistovny = build.Zp_id;
             _telefonPacient = build.Pacient_Telefon;
             _emailPacient = build.Pacient_Email;
+            _kontaktniAdresa = build.Kontaktni_adresa;
             _notifikace = build.Pacient_Notifikace;
             _vezeni = build.Pacient_Veznice;
             _hmotnost = build.Pacient_Hmotnost;
@@ -1562,6 +1570,7 @@ namespace eRECEPT
                 if (icp != null) src = src.Replace("${icp}", icp);
                 if (pzs != null) src = src.Replace("${pzs}", pzs);
                 if (telefon != null) src = src.Replace("${telefon}", telefon);
+                if (kontaktniAdresa != null) src = src.Replace("${kontaktniAdresa}", kontaktniAdresa);
                 if (odb != null) src = src.Replace("${odbornost}", odb);
                 if (poznamka != null) src = src.Replace("${poznamka}", poznamka);
                 if (upozornitLekare != null) src = src.Replace("${upozornitLekare}", upozornitLekare.ToString());
