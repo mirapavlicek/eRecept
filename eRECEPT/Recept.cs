@@ -717,6 +717,7 @@ namespace eRECEPT
         internal string _postuppripravy;
         internal string _iplpForma;
         internal int _IdLpZdroj;
+        internal string _iplpForma;
         internal List<SlozkyLP> _slozkyLP = new List<SlozkyLP>();
 
 
